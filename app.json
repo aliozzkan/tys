@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "Tesis Yönetim Sistemi",
+    "slug": "TYS",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.vkeam.tys",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This application allows you to take, save and share photos. You allow for do maintenance.",
+        "NSPhotoLibraryUsageDescription": "This application allows you to view, select and upload your photos.",
+        "NSPhotoLibraryAddUsageDescription": "This application allows you to upload photos to your gallery. "
+      }
+    },
+    "android": {
+      "permissions": [
+        "com.google.android.c2dm.permission.RECEIVE",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.vkeam.tys"
+    }
+  }
+}
