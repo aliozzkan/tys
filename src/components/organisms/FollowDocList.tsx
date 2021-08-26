@@ -104,9 +104,12 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
 
     function onFilter(item: IFollowDoc) {
       if (props.filterData) {
-        const { userTypes } = props.filterData;
+        const { userTypes, completeTypes } = props.filterData;
         const filters = [];
 
+        if (completeTypes?.length > 0) {
+          filters.push(completeTypes.includes(item.isCompleted ? 1 : 2));
+        }
         if (userTypes?.length > 0) {
           filters.push(userTypes.includes(item.userTypeID));
         }

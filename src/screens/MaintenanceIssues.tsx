@@ -31,6 +31,7 @@ const MaintenanceIssues: FC<
               "maintenanceStatus",
               "userTypes",
               "periods",
+              "completeTypes"
             ],
           });
         }}

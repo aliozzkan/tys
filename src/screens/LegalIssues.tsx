@@ -23,7 +23,7 @@ const LegalIssues = (props: any) => {
           props.navigation.navigate("Filter", {
             backRoute: "LegalIssueList",
             filterData: props?.route?.params?.filterData,
-            keys: ["legalStatus", "userTypes"],
+            keys: ["legalStatus", "userTypes", "completeTypes"],
           });
         }}
       />

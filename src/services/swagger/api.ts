@@ -38,6 +38,12 @@ export interface AddDemandDTO {
      * @type {number}
      * @memberof AddDemandDTO
      */
+    demandGroupID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof AddDemandDTO
+     */
     userTypeID?: number;
     /**
      * 
@@ -2097,6 +2103,12 @@ export interface Demand {
      * @type {number}
      * @memberof Demand
      */
+    demandGroupID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Demand
+     */
     projectID?: number;
     /**
      * 
@@ -2229,6 +2241,62 @@ export interface DemandDocument {
 /**
  * 
  * @export
+ * @interface DemandGroup
+ */
+export interface DemandGroup {
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandGroup
+     */
+    id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandGroup
+     */
+    projectID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandGroup
+     */
+    name?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandGroup
+     */
+    createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DemandGroupListDataResult
+ */
+export interface DemandGroupListDataResult {
+    /**
+     * 
+     * @type {Array<DemandGroup>}
+     * @memberof DemandGroupListDataResult
+     */
+    data?: Array<DemandGroup> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DemandGroupListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandGroupListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface DemandReportDTO
  */
 export interface DemandReportDTO {
@@ -2238,6 +2306,18 @@ export interface DemandReportDTO {
      * @memberof DemandReportDTO
      */
     id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandReportDTO
+     */
+    demandGroupID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandReportDTO
+     */
+    demandGroupName?: string | null;
     /**
      * 
      * @type {number}
@@ -6966,7 +7046,7 @@ export const ControlTaskApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary denetim için; denetim günceller sadece isim ve isactive i günceller
+         * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7211,7 +7291,7 @@ export const ControlTaskApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary denetim için; denetim günceller sadece isim ve isactive i günceller
+         * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7389,7 +7469,7 @@ export const ControlTaskApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary denetim için; denetim günceller sadece isim ve isactive i günceller
+         * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -7595,7 +7675,7 @@ export class ControlTaskApi extends BaseAPI {
 
     /**
      * 
-     * @summary denetim için; denetim günceller sadece isim ve isactive i günceller
+     * @summary denetim için; denetim günceller
      * @param {Control} [control] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -7664,6 +7744,43 @@ export const DemandApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @summary Talep grubu ekler
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandAddDemandGroupPost: async (demandGroup?: DemandGroup, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Demand/AddDemandGroup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(demandGroup, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Yeni talep ekler
          * @param {AddDemandDTO} [addDemandDTO] 
          * @param {*} [options] Override http request option.
@@ -7724,6 +7841,44 @@ export const DemandApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (demandId !== undefined) {
                 localVarQueryParameter['demandId'] = demandId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Talep gruplarını listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandGroupListGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Demand/GetDemandGroupList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
             }
 
 
@@ -7928,6 +8083,43 @@ export const DemandApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @summary Talep grubu günceller
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandUpdateDemandGroupPost: async (demandGroup?: DemandGroup, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Demand/UpdateDemandGroup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(demandGroup, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Talep günceller
          * @param {Demand} [demand] 
          * @param {*} [options] Override http request option.
@@ -8023,6 +8215,17 @@ export const DemandApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Talep grubu ekler
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDemandAddDemandGroupPost(demandGroup?: DemandGroup, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandAddDemandGroupPost(demandGroup, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Yeni talep ekler
          * @param {AddDemandDTO} [addDemandDTO] 
          * @param {*} [options] Override http request option.
@@ -8041,6 +8244,17 @@ export const DemandApiFp = function(configuration?: Configuration) {
          */
         async apiDemandGetDemandDocumentListGet(demandId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandGetDemandDocumentListGet(demandId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Talep gruplarını listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDemandGetDemandGroupListGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DemandGroupListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandGetDemandGroupListGet(projectId, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8100,6 +8314,17 @@ export const DemandApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Talep grubu günceller
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDemandUpdateDemandGroupPost(demandGroup?: DemandGroup, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandUpdateDemandGroupPost(demandGroup, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Talep günceller
          * @param {Demand} [demand] 
          * @param {*} [options] Override http request option.
@@ -8142,6 +8367,16 @@ export const DemandApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @summary Talep grubu ekler
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandAddDemandGroupPost(demandGroup?: DemandGroup, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiDemandAddDemandGroupPost(demandGroup, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Yeni talep ekler
          * @param {AddDemandDTO} [addDemandDTO] 
          * @param {*} [options] Override http request option.
@@ -8159,6 +8394,16 @@ export const DemandApiFactory = function (configuration?: Configuration, basePat
          */
         apiDemandGetDemandDocumentListGet(demandId?: number, options?: any): AxiosPromise<void> {
             return localVarFp.apiDemandGetDemandDocumentListGet(demandId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Talep gruplarını listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandGroupListGet(projectId?: number, options?: any): AxiosPromise<DemandGroupListDataResult> {
+            return localVarFp.apiDemandGetDemandGroupListGet(projectId, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8212,6 +8457,16 @@ export const DemandApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @summary Talep grubu günceller
+         * @param {DemandGroup} [demandGroup] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandUpdateDemandGroupPost(demandGroup?: DemandGroup, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiDemandUpdateDemandGroupPost(demandGroup, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Talep günceller
          * @param {Demand} [demand] 
          * @param {*} [options] Override http request option.
@@ -8254,6 +8509,18 @@ export class DemandApi extends BaseAPI {
 
     /**
      * 
+     * @summary Talep grubu ekler
+     * @param {DemandGroup} [demandGroup] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DemandApi
+     */
+    public apiDemandAddDemandGroupPost(demandGroup?: DemandGroup, options?: any) {
+        return DemandApiFp(this.configuration).apiDemandAddDemandGroupPost(demandGroup, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Yeni talep ekler
      * @param {AddDemandDTO} [addDemandDTO] 
      * @param {*} [options] Override http request option.
@@ -8274,6 +8541,18 @@ export class DemandApi extends BaseAPI {
      */
     public apiDemandGetDemandDocumentListGet(demandId?: number, options?: any) {
         return DemandApiFp(this.configuration).apiDemandGetDemandDocumentListGet(demandId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Talep gruplarını listeler
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DemandApi
+     */
+    public apiDemandGetDemandGroupListGet(projectId?: number, options?: any) {
+        return DemandApiFp(this.configuration).apiDemandGetDemandGroupListGet(projectId, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8338,6 +8617,18 @@ export class DemandApi extends BaseAPI {
 
     /**
      * 
+     * @summary Talep grubu günceller
+     * @param {DemandGroup} [demandGroup] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DemandApi
+     */
+    public apiDemandUpdateDemandGroupPost(demandGroup?: DemandGroup, options?: any) {
+        return DemandApiFp(this.configuration).apiDemandUpdateDemandGroupPost(demandGroup, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Talep günceller
      * @param {Demand} [demand] 
      * @param {*} [options] Override http request option.
@@ -8370,7 +8661,7 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
     return {
         /**
          * 
-         * @summary Dokumana yen bakım ekler
+         * @summary Dokumana yeni bakım ekler
          * @param {DocumentMaintenanceType} [documentMaintenanceType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8769,7 +9060,44 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @summary Dokuman günceller, sadece isActive alanını güncelliyor
+         * @summary Dokumana ait bakımı günceller, sadece Question ve IsActive parametresini güncelliyor
+         * @param {DocumentMaintenanceType} [documentMaintenanceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentUpdateDocumentMaintenanceTypePost: async (documentMaintenanceType?: DocumentMaintenanceType, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Document/UpdateDocumentMaintenanceType`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(documentMaintenanceType, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Dokuman günceller
          * @param {Document} [document] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8816,7 +9144,7 @@ export const DocumentApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary Dokumana yen bakım ekler
+         * @summary Dokumana yeni bakım ekler
          * @param {DocumentMaintenanceType} [documentMaintenanceType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8934,7 +9262,18 @@ export const DocumentApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary Dokuman günceller, sadece isActive alanını güncelliyor
+         * @summary Dokumana ait bakımı günceller, sadece Question ve IsActive parametresini güncelliyor
+         * @param {DocumentMaintenanceType} [documentMaintenanceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType?: DocumentMaintenanceType, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary Dokuman günceller
          * @param {Document} [document] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -8955,7 +9294,7 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
     return {
         /**
          * 
-         * @summary Dokumana yen bakım ekler
+         * @summary Dokumana yeni bakım ekler
          * @param {DocumentMaintenanceType} [documentMaintenanceType] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9062,7 +9401,17 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @summary Dokuman günceller, sadece isActive alanını güncelliyor
+         * @summary Dokumana ait bakımı günceller, sadece Question ve IsActive parametresini güncelliyor
+         * @param {DocumentMaintenanceType} [documentMaintenanceType] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType?: DocumentMaintenanceType, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Dokuman günceller
          * @param {Document} [document] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -9082,7 +9431,7 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
 export class DocumentApi extends BaseAPI {
     /**
      * 
-     * @summary Dokumana yen bakım ekler
+     * @summary Dokumana yeni bakım ekler
      * @param {DocumentMaintenanceType} [documentMaintenanceType] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -9211,7 +9560,19 @@ export class DocumentApi extends BaseAPI {
 
     /**
      * 
-     * @summary Dokuman günceller, sadece isActive alanını güncelliyor
+     * @summary Dokumana ait bakımı günceller, sadece Question ve IsActive parametresini güncelliyor
+     * @param {DocumentMaintenanceType} [documentMaintenanceType] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentApi
+     */
+    public apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType?: DocumentMaintenanceType, options?: any) {
+        return DocumentApiFp(this.configuration).apiDocumentUpdateDocumentMaintenanceTypePost(documentMaintenanceType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Dokuman günceller
      * @param {Document} [document] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

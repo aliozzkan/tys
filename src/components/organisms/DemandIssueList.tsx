@@ -119,11 +119,25 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
 
   function onFilter(item: IDemand) {
     if (props.filterData) {
-      const { userTypes } = props.filterData;
+      const { userTypes, demandGroup, completeTypes } = props.filterData;
+      const isRequiredDoc = item.documents
+        .map((doc) => doc.isCompleted)
+        .includes(false);
+
       const filters = [];
 
       if (userTypes?.length > 0) {
         filters.push(userTypes.includes(item.userTypeID));
+      }
+
+      if(completeTypes?.length > 0) {
+        const statu = !isRequiredDoc ? 1 : 2;
+        filters.push(completeTypes.includes(statu));
+        
+      }
+
+      if (demandGroup?.length > 0) {
+        filters.push(demandGroup.includes(item.demandGroupID));
       }
 
       if (filters.length === 0) return true;
@@ -134,7 +148,7 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     }
   }
 
-  return !timelineManager.isFullfilled || (!!data && data.length > 0)  ? (
+  return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
     <IssueFlatList
       ItemComponent={DemandIssueItem}
       refreshing={timelineManager.isPending}

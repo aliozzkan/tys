@@ -24,12 +24,15 @@ const initialValue = {
   legalStatus: [] as any[],
   userTypes: [] as any[],
   periods: [] as any[],
+  completeTypes: [] as any[],
+  demandGroup: [] as any[],
 };
 
 const Filter = (props: any) => {
-  const { project } = useAuth();
+  const { project, user } = useAuth();
   const maintenanceDescription = Hooks.MaintenanceDescription();
   const legalDescription = Hooks.LegalDescription();
+  const demandGroup = Hooks.DemandGroupList();
   const userType = Hooks.UserTypeList();
   const periods = Hooks.PeriodList();
   const [filterData, setFilterData] = useState(
@@ -49,6 +52,9 @@ const Filter = (props: any) => {
     if (props?.route?.params?.keys?.includes("periods")) {
       periods.fetch(project.id);
     }
+    if (props?.route?.params?.keys?.includes("demandGroup")) {
+      demandGroup.fetch(project.id);
+    }
   }, []);
 
   function handleClickOnFilter(value?: any) {
@@ -59,9 +65,9 @@ const Filter = (props: any) => {
 
   function handleChange(key: keyof typeof filterData, value: any) {
     const newValueForKey: any[] = !!filterData[key].includes(value)
-      ? filterData[key].filter((item) => item !== value)
+      ? filterData[key].filter((item: any) => item !== value)
       : [...filterData[key], value];
-    setFilterData((state) => ({
+    setFilterData((state: any) => ({
       ...state,
       [key]: newValueForKey,
     }));
@@ -71,6 +77,28 @@ const Filter = (props: any) => {
 
   return (
     <ScrollView>
+      {props?.route?.params?.keys?.includes("completeTypes") && (
+        <Box px="l">
+          <FilterTitle>Durum</FilterTitle>
+          <Box>
+            <FilterItem
+              label="Gerçekleşen"
+              value={filterData.completeTypes.includes(1)}
+              onChange={() => {
+                handleChange("completeTypes", 1);
+              }}
+            />
+            <FilterItem
+              label="Gerçekleşmeyen"
+              value={filterData.completeTypes.includes(2)}
+              onChange={() => {
+                handleChange("completeTypes", 2);
+              }}
+            />
+          </Box>
+        </Box>
+      )}
+
       {props?.route?.params?.keys?.includes("maintenanceTypes") && (
         <Box px="l">
           <FilterTitle>Bakım Tipi</FilterTitle>
@@ -130,16 +158,22 @@ const Filter = (props: any) => {
         <Box px="l">
           <FilterTitle>Kullanıcı Tipi</FilterTitle>
           {userType.isFullfilled &&
-            userType.data?.data.data.map((item: any, index: number) => (
-              <FilterItem
-                key={`${item.id}-${index}`}
-                label={item.name}
-                value={filterData.userTypes.includes(item.id)}
-                onChange={() => {
-                  handleChange("userTypes", item.id);
-                }}
-              />
-            ))}
+            userType.data?.data.data
+              .filter((item: any) =>
+                user.userTypes
+                  .map((_userType) => _userType.id)
+                  .includes(item.id)
+              )
+              .map((item: any, index: number) => (
+                <FilterItem
+                  key={`${item.id}-${index}`}
+                  label={item.name}
+                  value={filterData.userTypes.includes(item.id)}
+                  onChange={() => {
+                    handleChange("userTypes", item.id);
+                  }}
+                />
+              ))}
         </Box>
       )}
       {props?.route?.params?.keys?.includes("periods") && (
@@ -153,6 +187,22 @@ const Filter = (props: any) => {
                 value={filterData.periods.includes(item.id)}
                 onChange={() => {
                   handleChange("periods", item.id);
+                }}
+              />
+            ))}
+        </Box>
+      )}
+      {props?.route?.params?.keys?.includes("demandGroup") && (
+        <Box px="l">
+          <FilterTitle>Grup</FilterTitle>
+          {demandGroup.isFullfilled &&
+            demandGroup.data?.data.data.map((item: any, index: number) => (
+              <FilterItem
+                key={`${item.id}-${index}`}
+                label={item.name}
+                value={filterData.demandGroup.includes(item.id)}
+                onChange={() => {
+                  handleChange("demandGroup", item.id);
                 }}
               />
             ))}

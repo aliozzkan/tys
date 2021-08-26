@@ -163,6 +163,10 @@ export const Hooks = {
     useFetchManager<typeof API.DemandAPI.apiDemandUploadDemandDocumentPost>(
       API.DemandAPI.apiDemandUploadDemandDocumentPost
     ),
+  DemandGroupList: () =>
+    useFetchManager<typeof API.DemandAPI.apiDemandGetDemandGroupListGet>(
+      API.DemandAPI.apiDemandGetDemandGroupListGet
+    ),
   DocumentTimeline: () =>
     useFetchManager<typeof API.Document.apiDocumentGetDocumentTimelineGet>(
       API.Document.apiDocumentGetDocumentTimelineGet

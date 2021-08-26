@@ -20,7 +20,7 @@ const DemandIssues = (props: any) => {
           props.navigation.navigate("Filter", {
             backRoute: "DemandIssueList",
             filterData: props?.route?.params?.filterData,
-            keys: ["userTypes"],
+            keys: ["userTypes", "demandGroup", "completeTypes"],
           });
         }}
       />

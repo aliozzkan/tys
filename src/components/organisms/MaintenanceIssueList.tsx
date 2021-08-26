@@ -15,14 +15,7 @@ import Moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface MaintenanceIssueListProps {
-  filterData?:
-    | {
-        maintenanceTypes: any[];
-        maintenanceStatus: any[];
-        userTypes: any[];
-        periods: any[];
-      }
-    | undefined;
+  filterData?: any;
 }
 interface MaintenanceIssueListHandles {
   onRefresh: () => void;
@@ -66,7 +59,13 @@ const MaintenanceIssueList = forwardRef<
     }
 
     const index = getIndex(timelineManager.data?.data.data);
-    if (data && data?.length > 0 && index !== undefined && !isNaN(index) && index >= 0) {
+    if (
+      data &&
+      data?.length > 0 &&
+      index !== undefined &&
+      !isNaN(index) &&
+      index >= 0
+    ) {
       scrollRef.current?.scrollToIndex({ index, animated: true });
     }
   }
@@ -95,7 +94,13 @@ const MaintenanceIssueList = forwardRef<
       }
     }
     const index = getTodayIndex();
-    if (data && data.length > 0 && index !== undefined && !isNaN(index) && index >= 0) {
+    if (
+      data &&
+      data.length > 0 &&
+      index !== undefined &&
+      !isNaN(index) &&
+      index >= 0
+    ) {
       scrollRef.current?.scrollToIndex({ index, animated: true });
     }
   }
@@ -112,14 +117,22 @@ const MaintenanceIssueList = forwardRef<
 
   function onFilter(item: IMaintenanceIssue) {
     if (props.filterData) {
-      const { maintenanceStatus, maintenanceTypes, periods, userTypes } =
-        props.filterData;
+      const {
+        maintenanceStatus,
+        maintenanceTypes,
+        periods,
+        userTypes,
+        completeTypes,
+      } = props.filterData;
       const filters = [];
 
       if (maintenanceStatus?.length > 0) {
         filters.push(
           maintenanceStatus.includes(item.maintenanceTransactionStatus)
         );
+      }
+      if (completeTypes?.length > 0) {
+        filters.push(completeTypes.includes(item.isMaintenanceComplete ? 1 : 2));
       }
       if (maintenanceTypes?.length > 0) {
         filters.push(maintenanceTypes.includes(item.maintenanceTypeID));
@@ -139,22 +152,20 @@ const MaintenanceIssueList = forwardRef<
     }
   }
 
-  return !timelineManager.isFullfilled || (!!data && data.length > 0)  ? (
+  return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
     <IssueFlatList
-    ItemComponent={MaintenanceIssueItem}
-    refreshing={timelineManager.isPending}
-    onRefresh={_getList}
-    scrollRef={scrollRef}
-    data={data}
-  />
+      ItemComponent={MaintenanceIssueItem}
+      refreshing={timelineManager.isPending}
+      onRefresh={_getList}
+      scrollRef={scrollRef}
+      data={data}
+    />
   ) : (
     <Box flex={1} alignItems="center" justifyContent="center">
       <MaterialCommunityIcons name="box-shadow" size={70} />
       <Text>Veri Bulunamadı!</Text>
     </Box>
   );
-
-  
 });
 
 export default MaintenanceIssueList;

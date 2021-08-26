@@ -148,6 +148,8 @@ export interface IDemand {
   explain?: any;
   demandIsActive: boolean;
   demandCreateDate: string;
+  demandGroupID: number;
+  demandGroupName: string;
   documents: IDemandDocument[];
 }
 

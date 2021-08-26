@@ -23,7 +23,7 @@ const FollowDocIssues = (props: any) => {
           props.navigation.navigate("Filter", {
             backRoute: "FollowDocsList",
             filterData: props?.route?.params?.filterData,
-            keys: ["userTypes"],
+            keys: ["userTypes", "completeTypes"],
           });
         }}
       />

@@ -53,6 +53,10 @@ const DemandIssueItem = (props: Props) => {
         <KeyValue title="Oda" value={dem.roomName} />
         <KeyValue title="Kullanıcı Tipi" value={dem.userTypeName} />
         <KeyValue
+          title="Grup"
+          value={dem.demandGroupName}
+        />
+        <KeyValue
           title="Oluşturulma Tarihi"
           value={Moment(dem.demandCreateDate).format("DD.MM.YYYY")}
         />

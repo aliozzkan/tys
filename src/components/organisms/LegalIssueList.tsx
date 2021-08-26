@@ -115,9 +115,12 @@ const LegalIssueList = forwardRef<LegalIssueListHandles, LegalIssueListProps>(
 
     function onFilter(item: ILegal) {
       if (props.filterData) {
-        const { userTypes, legalStatus } = props.filterData;
+        const { userTypes, legalStatus, completeTypes } = props.filterData;
         const filters = [];
 
+        if (completeTypes?.length > 0) {
+          filters.push(completeTypes.includes(item.isCompleted ? 1 : 2));
+        }
         if (legalStatus?.length > 0) {
           filters.push(legalStatus.includes(item.status));
         }

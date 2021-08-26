@@ -23,7 +23,7 @@ const ControlTaskIssues = (props: any) => {
           props.navigation.navigate("Filter", {
             backRoute: "ControlTaskList",
             filterData: props?.route?.params?.filterData,
-            keys: ["userTypes"],
+            keys: ["userTypes", "completeTypes"],
           });
         }}
       />
