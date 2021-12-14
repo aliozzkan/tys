@@ -6,16 +6,18 @@ import React, {
 } from "react";
 import { FlatList, RefreshControl } from "react-native";
 import { Box, IssueFlatList, Text } from "../";
-import { useAuth } from "../../hooks/redux-hooks";
+import { useAuth, useRedux } from "../../hooks/redux-hooks";
 import { IFollowDoc } from "../../models/timeline";
 import { Hooks } from "../../services";
 import { spacing } from "../../theme";
 import FollowDocItem from "./FollowDocItem";
 import Moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface FollowDocListProps {
   filterData: any;
+  searchQuery: string;
 }
 interface FollowDocListHandles {
   onRefresh: () => void;
@@ -25,17 +27,22 @@ interface FollowDocListHandles {
 
 const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
   (props, ref) => {
-    const { project } = useAuth();
+    const { project, user } = useAuth();
     const timelineManager = Hooks.DocumentTimeline();
     const scrollRef = useRef<FlatList>(null);
+    const [
+      {
+        app: { selectedCampus },
+      },
+    ] = useRedux();
 
     function _getList() {
       timelineManager.fetch(project.id);
     }
 
     const data = props.filterData
-      ? timelineManager.data?.data.data.filter(onFilter)
-      : timelineManager.data?.data.data;
+      ? timelineManager.data?.data.data.filter(onFilter).filter(onSearchFilter).filter(onCampusFilter)
+      : timelineManager.data?.data.data.filter(onSearchFilter).filter(onCampusFilter);
 
     function _goUndone() {
       function getIndex(data: any[]) {
@@ -57,9 +64,18 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
         return undoneIndex;
       }
 
-      const index = getIndex(timelineManager.data?.data.data);
-      if (data && data.length > 0 && index !== undefined && !isNaN(index) && index >= -1) {
-        scrollRef.current?.scrollToIndex({ index, animated: true });
+      const index = getIndex(data);
+      if (
+        data &&
+        data.length > 0 &&
+        index !== undefined &&
+        !isNaN(index) &&
+        index >= -1
+      ) {
+        scrollRef.current?.scrollToOffset({
+          animated: true,
+          offset: index * (RFValue(235) + 16),
+        });
       }
     }
 
@@ -69,8 +85,8 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
           let index = 0;
           let closeIndex = 0;
           let close = 0;
-          while (index < timelineManager.data.data.data.length) {
-            const item = timelineManager.data.data.data[index];
+          while (index < data.length) {
+            const item = data[index];
             const day = Moment(item.endDate).diff(Moment(), "days") + 0;
             if (index === 0) {
               closeIndex = index;
@@ -87,8 +103,17 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
         }
       }
       const index = getTodayIndex();
-      if (data && data.length > 0 && index !== undefined && !isNaN(index) && index >= -1) {
-        scrollRef.current?.scrollToIndex({ index, animated: true });
+      if (
+        data &&
+        data.length > 0 &&
+        index !== undefined &&
+        !isNaN(index) &&
+        index >= -1
+      ) {
+        scrollRef.current?.scrollToOffset({
+          animated: true,
+          offset: index * (RFValue(235) + 16),
+        });
       }
     }
 
@@ -104,7 +129,7 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
 
     function onFilter(item: IFollowDoc) {
       if (props.filterData) {
-        const { userTypes, completeTypes } = props.filterData;
+        const { userTypes, completeTypes, onlyMe } = props.filterData;
         const filters = [];
 
         if (completeTypes?.length > 0) {
@@ -112,6 +137,10 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
         }
         if (userTypes?.length > 0) {
           filters.push(userTypes.includes(item.userTypeID));
+        }
+
+        if(onlyMe?.length > 0) {
+          filters.push((item as any).assignUserID === user.id);
         }
 
         if (filters.length === 0) return true;
@@ -122,7 +151,24 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
       }
     }
 
-    return !timelineManager.isFullfilled || (!!data && data.length > 0)  ? (
+    function onSearchFilter(item: IFollowDoc) {
+      if (
+        item.documentName
+          .toLowerCase()
+          .includes(props.searchQuery.toLowerCase())
+      ) {
+        return true;
+      }
+      return false;
+    }
+
+    function onCampusFilter(item: IFollowDoc) {
+      if(selectedCampus.id === -1) return true;
+      
+      return item.campusID === selectedCampus.id;
+    }
+
+    return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
       <IssueFlatList
         ItemComponent={FollowDocItem}
         refreshing={timelineManager.isPending}
@@ -136,7 +182,6 @@ const FollowDocList = forwardRef<FollowDocListHandles, FollowDocListProps>(
         <Text>Veri Bulunamadı!</Text>
       </Box>
     );
-
   }
 );
 

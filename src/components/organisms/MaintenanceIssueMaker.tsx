@@ -275,9 +275,9 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
           />
           <TextInput
             label="Bakım Notları"
-            value={datas.maintenanceFirm}
+            value={datas.explain}
             onChangeText={(text) =>
-              setDatas((state: any) => ({ ...state, maintenanceFirm: text }))
+              setDatas((state: any) => ({ ...state, explain: text }))
             }
           />
         </Card>

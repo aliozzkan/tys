@@ -6,15 +6,17 @@ import React, {
 } from "react";
 import { FlatList } from "react-native";
 import { Box, IssueFlatList, Text } from "../";
-import { useAuth } from "../../hooks/redux-hooks";
+import { useAuth, useRedux } from "../../hooks/redux-hooks";
 import { IControlTask } from "../../models/timeline";
 import { Hooks } from "../../services";
 import ControlTaskItem from "./ControlTaskItem";
 import Moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface Props {
   filterData: any;
+  searchQuery: string;
 }
 interface Handles {
   onRefresh: () => void;
@@ -23,17 +25,22 @@ interface Handles {
 }
 
 const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
-  const { project } = useAuth();
+  const { project, user } = useAuth();
   const timelineManager = Hooks.ControlTaskTimeline();
   const scrollRef = useRef<FlatList>(null);
+  const [
+    {
+      app: { selectedCampus },
+    },
+  ] = useRedux();
 
   function _getList() {
     timelineManager.fetch(project.id);
   }
 
   const data = props.filterData
-    ? timelineManager.data?.data.data.filter(onFilter)
-    : timelineManager.data?.data.data;
+    ? timelineManager.data?.data.data.filter(onFilter).filter(onSearchFilter).filter(onCampusFilter)
+    : timelineManager.data?.data.data.filter(onSearchFilter).filter(onCampusFilter);
 
   function _goUndone() {
     function getIndex(data: any[]) {
@@ -55,20 +62,29 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
       return undoneIndex;
     }
 
-    const index = getIndex(timelineManager.data?.data.data);
-    if (Array.isArray(data) && data?.length > 0 && index !== undefined && !isNaN(index) && index >= 0) {
-      scrollRef.current?.scrollToIndex({ index, animated: true });
+    const index = getIndex(data);
+    if (
+      Array.isArray(data) &&
+      data?.length > 0 &&
+      index !== undefined &&
+      !isNaN(index) &&
+      index >= 0
+    ) {
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(210) + 16),
+      });
     }
   }
 
   function _goToday() {
     function getTodayIndex() {
-      if (!!timelineManager.data?.data.data) {
+      if (!!data) {
         let index = 0;
         let closeIndex = 0;
         let close = 0;
-        while (index < timelineManager.data.data.data.length) {
-          const item = timelineManager.data.data.data[index];
+        while (index < data.length) {
+          const item = data[index];
           const day = Moment(item.endDate).diff(Moment(), "days") + 0;
           if (index === 0) {
             closeIndex = index;
@@ -85,8 +101,16 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
       }
     }
     const index = getTodayIndex();
-    if (Array.isArray(data) && data?.length > 0 && index !== undefined && !isNaN(index)) {
-      scrollRef.current?.scrollToIndex({ index, animated: true });
+    if (
+      Array.isArray(data) &&
+      data?.length > 0 &&
+      index !== undefined &&
+      !isNaN(index)
+    ) {
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(210) + 16),
+      });
     }
   }
 
@@ -102,7 +126,7 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
 
   function onFilter(item: IControlTask) {
     if (props.filterData) {
-      const { userTypes, completeTypes } = props.filterData;
+      const { userTypes, completeTypes, onlyMe } = props.filterData;
       const filters = [];
 
       if (completeTypes?.length > 0) {
@@ -111,6 +135,10 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
       if (userTypes?.length > 0) {
         filters.push(userTypes.includes(item.userTypeID));
       }
+      if(onlyMe?.length > 0) {
+        filters.push((item as any).userID === user.id)
+      }
+
 
       if (filters.length === 0) return true;
 
@@ -120,7 +148,24 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
     }
   }
 
-  return !timelineManager.isFullfilled || (!!data && data.length > 0)  ? (
+  function onSearchFilter(item: IControlTask) {
+    if (
+      item.controlName.toLowerCase().includes(props.searchQuery.toLowerCase())
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  function onCampusFilter(item: IControlTask) {
+    if(selectedCampus.id === -1) {
+      return true;
+    } 
+
+    return item.campusID === selectedCampus.id;
+  }
+
+  return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
     <IssueFlatList
       ItemComponent={ControlTaskItem}
       refreshing={timelineManager.isPending}
@@ -134,9 +179,6 @@ const ControlTaskList = forwardRef<Handles, Props>((props, ref) => {
       <Text>Veri Bulunamadı!</Text>
     </Box>
   );
-
-
-  
 });
 
 export default ControlTaskList;

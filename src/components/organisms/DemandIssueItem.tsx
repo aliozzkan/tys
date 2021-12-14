@@ -18,7 +18,7 @@ const DemandIssueItem = (props: Props) => {
     .map((item) => item.isCompleted)
     .includes(false);
   return (
-    <Card variant="timelineItem">
+    <Card variant="timelineItemDemand">
       <Box p="l">
         <Box
           flexDirection="row"
@@ -48,9 +48,6 @@ const DemandIssueItem = (props: Props) => {
         </Box>
         <Divider />
         <KeyValue title="Tesis" value={dem.campusName} />
-        <KeyValue title="Bina" value={dem.buildName} />
-        <KeyValue title="Kat" value={dem.floorName} />
-        <KeyValue title="Oda" value={dem.roomName} />
         <KeyValue title="Kullanıcı Tipi" value={dem.userTypeName} />
         <KeyValue
           title="Grup"

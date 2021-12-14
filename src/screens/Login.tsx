@@ -63,9 +63,7 @@ const LoginScreen: FC<AuthNaviProps<"Login">> = () => {
             >
               <Image
                 style={{ width: "100%", height: "100%", resizeMode: "cover" }}
-                source={{
-                  uri: "https://i.pinimg.com/originals/92/d3/e2/92d3e202bee3df35b5a65278158677c1.jpg",
-                }}
+                source={require("../../assets/images/siemensback.jpg")}
               />
             </Box>
             <Form<LoginForm>

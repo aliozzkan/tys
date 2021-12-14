@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   createRestyleComponent,
   createVariant,
@@ -7,15 +7,16 @@ import {
   VariantProps,
   BackgroundColorProps,
   backgroundColor,
-} from '@shopify/restyle';
-import {Theme} from '../../theme'
-import { ColorProps } from '@chakra-ui/react';
+} from "@shopify/restyle";
 
-type Props = SpacingProps<Theme> & BackgroundColorProps<Theme> & VariantProps<Theme, 'cardVariants'> & {children: any}
+import { Theme } from "../../theme";
+type Props = SpacingProps<Theme> &
+  BackgroundColorProps<Theme> &
+  VariantProps<Theme, "cardVariants"> & { children: any };
 const Card = createRestyleComponent<Props, Theme>([
   spacing,
   backgroundColor,
-  createVariant({themeKey: 'cardVariants'})
-])
+  createVariant({ themeKey: "cardVariants" }),
+]);
 
-export default Card
+export default Card;

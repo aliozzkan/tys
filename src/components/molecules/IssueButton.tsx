@@ -18,7 +18,7 @@ interface Props {
 const IssueButton: FC<Props> = (props) => {
   return (
     <TouchableOpacity
-      style={{ flex: 1, height: 50 }}
+      style={{ flex: 1, height: 40 }}
       onPress={props.onPress}
       disabled={!!props.disabled}
     >
@@ -36,7 +36,7 @@ const IssueButton: FC<Props> = (props) => {
         )}
         <Text
           color={`${props.color}.50` as any}
-          fontSize={RFValue(14)}
+          fontSize={RFValue(12)}
           fontFamily={FontFamily.RalewaySemibold}
         >
           {props.label}

@@ -1,6 +1,7 @@
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState } from "react";
 import { Box, AdvancedListHeader } from "../components";
 import MaintenanceIssueList from "../components/organisms/MaintenanceIssueList";
+import { useRedux } from "../hooks/redux-hooks";
 import { MaintenanceIssueStackProps } from "../navigations/stacks/MaintenanceIssueStack/MaintenanceIssueStack";
 
 const MaintenanceIssues: FC<
@@ -10,6 +11,12 @@ const MaintenanceIssues: FC<
   props.navigation.addListener("focus", () => {
     listRef.current.onRefresh();
   });
+  const [search, setSearch] = useState<string>("");
+  const [
+    {
+      app: { selectedCampus },
+    },
+  ] = useRedux();
   return (
     <Box flex={1}>
       <AdvancedListHeader
@@ -22,6 +29,7 @@ const MaintenanceIssues: FC<
         onPressColorDesc={() => {
           props.navigation.navigate("ColorDesc");
         }}
+        onChangeSearchQuery={(text) => setSearch(text)}
         onPressFilter={() => {
           props.navigation.navigate("Filter", {
             backRoute: "MaintenanceIssueList",
@@ -31,7 +39,7 @@ const MaintenanceIssues: FC<
               "maintenanceStatus",
               "userTypes",
               "periods",
-              "completeTypes"
+              "completeTypes",
             ],
           });
         }}
@@ -39,6 +47,7 @@ const MaintenanceIssues: FC<
       <MaintenanceIssueList
         ref={listRef}
         filterData={props?.route?.params?.filterData as any}
+        searchQuery={search}
       />
     </Box>
   );

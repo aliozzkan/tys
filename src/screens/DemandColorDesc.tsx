@@ -18,7 +18,6 @@ const ColorDescScreen = () => {
     );
   }
 
-  console.log(colorManager.data?.data.data);
   return (
     <Box flex={1}>
       <FlatList

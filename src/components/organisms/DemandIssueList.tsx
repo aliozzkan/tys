@@ -10,16 +10,18 @@ import React, {
   useRef,
 } from "react";
 import { Box, IssueFlatList } from "../";
-import { useAuth } from "../../hooks/redux-hooks";
+import { useAuth, useRedux } from "../../hooks/redux-hooks";
 import { IDemand } from "../../models/timeline";
 import { Hooks } from "../../services";
 import Text from "../atoms/Text";
 import DemandIssueItem from "./DemandIssueItem";
 import Moment from "moment";
 import { FlatList } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface Props {
   filterData: any;
+  searchQuery: string;
 }
 interface Handles {
   onRefresh: () => void;
@@ -28,17 +30,27 @@ interface Handles {
 }
 
 const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
-  const { project } = useAuth();
+  const { project, user } = useAuth();
   const timelineManager = Hooks.DemandTimeline();
   const scrollRef = useRef<FlatList>(null);
+  const [
+    {
+      app: { selectedCampus },
+    },
+  ] = useRedux();
 
   function _getList() {
     timelineManager.fetch(project.id);
   }
 
   const data = props.filterData
-    ? timelineManager.data?.data.data.filter(onFilter)
-    : timelineManager.data?.data.data;
+    ? timelineManager.data?.data.data
+        .filter(onFilter)
+        .filter(onSearchFilter)
+        .filter(onCampusFilter)
+    : timelineManager.data?.data.data
+        .filter(onSearchFilter)
+        .filter(onCampusFilter);
 
   function _goUndone() {
     function getIndex(data: any[]) {
@@ -60,7 +72,7 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
       return undoneIndex;
     }
 
-    const index = getIndex(timelineManager.data?.data.data);
+    const index = getIndex(data);
     if (
       data &&
       data.length > 0 &&
@@ -68,18 +80,21 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
       !isNaN(index) &&
       index >= -1
     ) {
-      scrollRef.current?.scrollToIndex({ index, animated: true });
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(180) + 16),
+      });
     }
   }
 
   function _goToday() {
     function getTodayIndex() {
-      if (!!timelineManager.data?.data.data) {
+      if (!!data) {
         let index = 0;
         let closeIndex = 0;
         let close = 0;
-        while (index < timelineManager.data.data.data.length) {
-          const item = timelineManager.data.data.data[index];
+        while (index < data.length) {
+          const item = data[index];
           const day = Moment(item.endDate).diff(Moment(), "days") + 0;
           if (index === 0) {
             closeIndex = index;
@@ -103,7 +118,10 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
       !isNaN(index) &&
       index >= -1
     ) {
-      scrollRef.current?.scrollToIndex({ index: index!, animated: true });
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(180) + 16),
+      });
     }
   }
 
@@ -119,7 +137,8 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
 
   function onFilter(item: IDemand) {
     if (props.filterData) {
-      const { userTypes, demandGroup, completeTypes } = props.filterData;
+      const { userTypes, demandGroup, completeTypes, onlyMe } =
+        props.filterData;
       const isRequiredDoc = item.documents
         .map((doc) => doc.isCompleted)
         .includes(false);
@@ -130,14 +149,25 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
         filters.push(userTypes.includes(item.userTypeID));
       }
 
-      if(completeTypes?.length > 0) {
+      if (completeTypes?.length > 0) {
         const statu = !isRequiredDoc ? 1 : 2;
         filters.push(completeTypes.includes(statu));
-        
       }
 
       if (demandGroup?.length > 0) {
         filters.push(demandGroup.includes(item.demandGroupID));
+      }
+
+      if (onlyMe?.length > 0) {
+        let isAssign = false;
+        item.documents.some((_document: any) => {
+          if (_document.assignUserID === user.id) {
+            isAssign = true;
+            return true;
+          }
+        });
+
+        filters.push(isAssign);
       }
 
       if (filters.length === 0) return true;
@@ -146,6 +176,21 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     } else {
       return true;
     }
+  }
+
+  function onSearchFilter(item: IDemand) {
+    if (
+      item.demandName.toLowerCase().includes(props.searchQuery.toLowerCase())
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  function onCampusFilter(item: IDemand) {
+    if (selectedCampus.id === -1) return true;
+
+    return item.campusID === selectedCampus.id;
   }
 
   return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (

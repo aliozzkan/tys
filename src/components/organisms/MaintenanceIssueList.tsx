@@ -6,16 +6,18 @@ import React, {
 } from "react";
 import { FlatList, RefreshControl } from "react-native";
 import { Box, IssueFlatList, Text } from "../";
-import { useAuth } from "../../hooks/redux-hooks";
+import { useAuth, useRedux } from "../../hooks/redux-hooks";
 import { IMaintenanceIssue } from "../../models/timeline";
 import { Hooks } from "../../services";
 import { spacing } from "../../theme";
 import MaintenanceIssueItem from "./MaintenanceIssueItem";
 import Moment from "moment";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { RFValue } from "react-native-responsive-fontsize";
 
 interface MaintenanceIssueListProps {
   filterData?: any;
+  searchQuery: string;
 }
 interface MaintenanceIssueListHandles {
   onRefresh: () => void;
@@ -30,14 +32,20 @@ const MaintenanceIssueList = forwardRef<
   const { project } = useAuth();
   const scrollRef = useRef<FlatList>(null);
   const timelineManager = Hooks.MaintenanceTimeline();
+  const [
+    {
+      app: { selectedCampus },
+    },
+  ] = useRedux();
 
   function _getList() {
     timelineManager.fetch(project.id);
   }
 
-  const data = props.filterData
-    ? timelineManager.data?.data.data.filter(onFilter)
-    : timelineManager.data?.data.data;
+  const data = timelineManager.data?.data.data
+    .filter(onFilter)
+    .filter(onSearchFilter)
+    .filter(onCampusFilter);
 
   function _goUndone() {
     function getIndex(data: any[]) {
@@ -58,7 +66,7 @@ const MaintenanceIssueList = forwardRef<
       return undoneIndex;
     }
 
-    const index = getIndex(timelineManager.data?.data.data);
+    const index = getIndex(data);
     if (
       data &&
       data?.length > 0 &&
@@ -66,18 +74,21 @@ const MaintenanceIssueList = forwardRef<
       !isNaN(index) &&
       index >= 0
     ) {
-      scrollRef.current?.scrollToIndex({ index, animated: true });
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(255) + 16),
+      });
     }
   }
 
   function _goToday() {
     function getTodayIndex() {
-      if (!!timelineManager.data?.data.data) {
+      if (!!data) {
         let index = 0;
         let closeIndex = 0;
         let close = 0;
-        while (index < timelineManager.data.data.data.length) {
-          const item = timelineManager.data.data.data[index];
+        while (index < data.length) {
+          const item = data[index];
           const day = Moment(item.endDate).diff(Moment(), "days") + 0;
           if (index === 0) {
             closeIndex = index;
@@ -101,7 +112,10 @@ const MaintenanceIssueList = forwardRef<
       !isNaN(index) &&
       index >= 0
     ) {
-      scrollRef.current?.scrollToIndex({ index, animated: true });
+      scrollRef.current?.scrollToOffset({
+        animated: true,
+        offset: index * (RFValue(255) + 16),
+      });
     }
   }
 
@@ -132,7 +146,9 @@ const MaintenanceIssueList = forwardRef<
         );
       }
       if (completeTypes?.length > 0) {
-        filters.push(completeTypes.includes(item.isMaintenanceComplete ? 1 : 2));
+        filters.push(
+          completeTypes.includes(item.isMaintenanceComplete ? 1 : 2)
+        );
       }
       if (maintenanceTypes?.length > 0) {
         filters.push(maintenanceTypes.includes(item.maintenanceTypeID));
@@ -150,6 +166,22 @@ const MaintenanceIssueList = forwardRef<
     } else {
       return true;
     }
+  }
+
+  function onSearchFilter(item: IMaintenanceIssue) {
+    if (
+      item.inventoryName.toLowerCase().includes(props.searchQuery.toLowerCase())
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  function onCampusFilter(item: IMaintenanceIssue) {
+    if (selectedCampus.id === -1) {
+      return true;
+    }
+    return selectedCampus.name === item.campusName;
   }
 
   return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (

@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { AdvancedListHeader, Box } from "../components";
 import LegalIssueList from "../components/organisms/LegalIssueList";
 
 const LegalIssues = (props: any) => {
   const listRef = useRef<any>(null);
+  const [search, setSearch] = useState<string>("");
   props.navigation.addListener("focus", () => {
     listRef.current.onRefresh();
   });
@@ -19,6 +20,7 @@ const LegalIssues = (props: any) => {
         onPressColorDesc={() => {
           props.navigation.navigate("ColorDesc");
         }}
+        onChangeSearchQuery={text => setSearch(text)}
         onPressFilter={() => {
           props.navigation.navigate("Filter", {
             backRoute: "LegalIssueList",
@@ -30,6 +32,7 @@ const LegalIssues = (props: any) => {
       <LegalIssueList
         ref={listRef}
         filterData={props?.route?.params?.filterData as any}
+        searchQuery={search}
       />
     </Box>
   );

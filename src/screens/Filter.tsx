@@ -26,6 +26,7 @@ const initialValue = {
   periods: [] as any[],
   completeTypes: [] as any[],
   demandGroup: [] as any[],
+  onlyMe: [1] as any[],
 };
 
 const Filter = (props: any) => {
@@ -73,10 +74,23 @@ const Filter = (props: any) => {
     }));
   }
 
-  console.log({ filterData, prop: props.route.params.filterData });
-
   return (
     <ScrollView>
+      {props?.route?.params?.keys?.includes("onlyMe") && (
+        <Box px="l">
+          <FilterTitle>Kişi</FilterTitle>
+          <Box>
+            <FilterItem
+              label="Sadece Ben"
+              value={filterData.onlyMe.includes(1)}
+              onChange={() => {
+                handleChange("onlyMe", 1);
+              }}
+            />
+          </Box>
+        </Box>
+      )}
+
       {props?.route?.params?.keys?.includes("completeTypes") && (
         <Box px="l">
           <FilterTitle>Durum</FilterTitle>
