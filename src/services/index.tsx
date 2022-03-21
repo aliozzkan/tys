@@ -27,8 +27,9 @@ import {
   InventoryMaintenanceDetailApiFactory,
   InventoryLegalInspectionApiFactory,
   ControlTaskApiFactory,
+  CounterApiFactory,
 } from "./swagger/api";
-import { useFetchManager, useFetchManagerStore } from "../hooks/fetch-manager";
+import { useFetchManager } from "../hooks/fetch-manager";
 import axios, { AxiosInstance } from "axios";
 import { store } from "../store";
 import { __mode__, api } from "../constants";
@@ -88,6 +89,7 @@ const API = {
   MaintenanceDetailAPI: InventoryMaintenanceDetailApiFactory(...founds),
   InventoryLegalInspectionAPI: InventoryLegalInspectionApiFactory(...founds),
   ControlTaskAPI: ControlTaskApiFactory(...founds),
+  CounterAPI: CounterApiFactory(...founds),
 };
 
 export const Hooks = {
@@ -209,5 +211,37 @@ export const Hooks = {
     >(
       API.MaintenanceAPI
         .apiMaintenanceCommonGetMaintenancePeriodListByProjectIdGet
+    ),
+  UserInfo: () =>
+    useFetchManager<typeof API.UserAPI.apiUsersGetUserByIdGet>(
+      API.UserAPI.apiUsersGetUserByIdGet
+    ),
+  UpdateUserInfo: () =>
+    useFetchManager<typeof API.UserAPI.apiUsersUpdateUserPost>(
+      API.UserAPI.apiUsersUpdateUserPost
+    ),
+  ChangePassword: () =>
+    useFetchManager<typeof API.UserAPI.apiUsersUpdateUserPasswordChangeGet>(
+      API.UserAPI.apiUsersUpdateUserPasswordChangeGet
+    ),
+  CampusList: () =>
+    useFetchManager<typeof API.CampusAPI.apiCampusGetCampusListByProjectIDGet>(
+      API.CampusAPI.apiCampusGetCampusListByProjectIDGet
+    ),
+  VersionControl: () =>
+    useFetchManager<typeof API.UserAPI.apiUsersVersionControlGet>(
+      API.UserAPI.apiUsersVersionControlGet
+    ),
+  CounterTaskTimeline: () =>
+    useFetchManager<typeof API.CounterAPI.apiCounterCounterTimelineGet>(
+      API.CounterAPI.apiCounterCounterTimelineGet
+    ),
+  CounterColorDesc: () =>
+    useFetchManager<typeof API.CounterAPI.apiCounterCounterTimelineStatusGet>(
+      API.CounterAPI.apiCounterCounterTimelineStatusGet
+    ),
+  CounterDo: () =>
+    useFetchManager<typeof API.CounterAPI.apiCounterDoCounterMaintenancePost>(
+      API.CounterAPI.apiCounterDoCounterMaintenancePost
     ),
 };

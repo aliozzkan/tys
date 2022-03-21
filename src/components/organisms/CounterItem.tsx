@@ -1,27 +1,26 @@
 import React from "react";
 import { Card, Box, Text, KeyValue } from "../";
-import { IFollowDoc } from "../../models/timeline";
+import { IControlTask, ICounter } from "../../models/timeline";
 import Moment from "moment";
 import { FontFamily } from "../../LoadAssets";
 import IssueButton from "../molecules/IssueButton";
 import { useNavigation } from "@react-navigation/native";
 
 export enum TimelineStatus {
-  completed = 2,
-  notTime = 1,
+  done = 1,
+  ready = 2,
+  wait = 3,
   late = 4,
-  ready = 3,
-  needDocument = 5,
-  lateDone = 6,
+  lateTime = 5,
 }
 
 interface Props {
-  data: IFollowDoc;
+  data: ICounter;
 }
 
-const FollowDocItem = (props: Props) => {
-  const maintenanceDate = Moment(props.data.endDate);
+const CounterItem = (props: Props) => {
   const navigation = useNavigation<any>();
+  const maintenanceDate = Moment(props.data.endDate);
 
   return (
     <Card variant="timelineItem">
@@ -41,7 +40,7 @@ const FollowDocItem = (props: Props) => {
         <Box p="m" flex={1} width="100%">
           <Box flexDirection="row" justifyContent="space-between">
             <Text fontFamily={FontFamily.MonserratSemibold} fontSize={18} lineHeight={18}>
-              {props.data.documentName}
+              {props.data.location}
             </Text>
             <Box
               borderRadius="s"
@@ -52,21 +51,13 @@ const FollowDocItem = (props: Props) => {
               height={20}
             />
           </Box>
-
           <Box height={1} backgroundColor="gray.400" width="100%" mt="s" />
-          <KeyValue title="Tesis" value={props.data.campusName} />
-          <KeyValue title="Bina" value={props.data.buildName} />
-          <KeyValue title="Oda" value={props.data.floorName} />
-          <KeyValue title="Kat" value={props.data.roomName} />
-          <KeyValue title="Periyot" value={props.data.documentPeriodName} />
+          <KeyValue title="Barkod" value={props.data.barcode} />
+          <KeyValue title="Sayaç Türü" value={props.data.counterTypeName} />
+          <KeyValue title="Periyot" value={props.data.periodName} />
           <KeyValue
             title="Planlı Bakım Tarihi"
             value={Moment(props.data.endDate).format("DD.MM.YYYY")}
-          />
-          <KeyValue
-            title="Kullanıcı Tipi"
-            value={props.data.userTypeName}
-            highlight
           />
           <Box
             flexDirection="row"
@@ -79,50 +70,38 @@ const FollowDocItem = (props: Props) => {
         </Box>
       </Box>
       <Box flexDirection="row">
-        {[TimelineStatus.completed, TimelineStatus.lateDone].includes(props.data.status) && (
-          <IssueButton
-          color="green"
-          label="Gerçekleşti"
-          onPress={() => {}}
-          leftIcon="check"
-          disabled
-        />
-        )}
-        {[TimelineStatus.notTime].includes(props.data.status) && (
-          <IssueButton
-          color="yellow"
-          label="Zamanı Bekleniyor"
-          onPress={() => {}}
-          leftIcon="clock"
-          disabled
-        />
-        )}
-        {[TimelineStatus.late, TimelineStatus.ready].includes(
-          props.data.status
+        {[TimelineStatus.ready, TimelineStatus.late].includes(
+          props.data.statusCode
         ) && (
           <IssueButton
-            color="blue"
             label="İşlem Yap"
+            color="blue"
             onPress={() => {
-              navigation.navigate("DoFollowDocIssueStack", {
-                screen: "FollowDocDo",
+              navigation.navigate("DoCounterIssueStack", {
+                screen: "CounterTaskDo",
                 params: { data: props.data },
               });
             }}
-            rightIcon="arrow-right"
           />
         )}
-        {[TimelineStatus.needDocument].includes(props.data.status) && (
+        {[TimelineStatus.done].includes(
+          props.data.statusCode
+        ) && (
           <IssueButton
-            color="purple"
-            label="Doküman Yükle"
-            onPress={() => {
-              navigation.navigate("DoFollowDocIssueStack", {
-                screen: "FollowDocUpload",
-                params: { data: props.data },
-              });
-            }}
-            rightIcon="arrow-right"
+            label="Gerçekleşti"
+            leftIcon="check"
+            color="green"
+            disabled
+            onPress={() => {}}
+          />
+        )}
+        {[TimelineStatus.wait].includes(props.data.statusCode) && (
+          <IssueButton
+            label="Zamanı Bekleniyor"
+            leftIcon="clock"
+            color="yellow"
+            disabled
+            onPress={() => {}}
           />
         )}
       </Box>
@@ -130,4 +109,4 @@ const FollowDocItem = (props: Props) => {
   );
 };
 
-export default FollowDocItem;
+export default CounterItem;

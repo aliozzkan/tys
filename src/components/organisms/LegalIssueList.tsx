@@ -7,14 +7,17 @@ import React, {
   useRef,
 } from "react";
 import { FlatList } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import { Box, IssueFlatList, Text } from "../";
-import { useAuth } from "../../hooks/redux-hooks";
+import { useAuth, useRedux } from "../../hooks/redux-hooks";
 import { ILegal } from "../../models/timeline";
 import { Hooks } from "../../services";
 import LegalIssueItem from "./LegalIssueItem";
 
 interface LegalIssueListProps {
   filterData?: any;
+  searchQuery: string;
 }
 interface LegalIssueListHandles {
   onRefresh: () => void;
@@ -27,14 +30,19 @@ const LegalIssueList = forwardRef<LegalIssueListHandles, LegalIssueListProps>(
     const { project } = useAuth();
     const timelineManager = Hooks.LegalTimeline();
     const scrollRef = useRef<FlatList>(null);
+    const [
+      {
+        app: { selectedCampus },
+      },
+    ] = useRedux();
 
     function _getList() {
       timelineManager.fetch(project.id);
     }
 
     const data = props.filterData
-      ? timelineManager.data?.data.data.filter(onFilter)
-      : timelineManager.data?.data.data;
+      ? timelineManager.data?.data.data.filter(onFilter).filter(onSearchFilter).filter(onCampusFilter)
+      : timelineManager.data?.data.data.filter(onSearchFilter).filter(onCampusFilter);
 
     function _goUndone() {
       function getIndex(data: any[]) {
@@ -64,7 +72,10 @@ const LegalIssueList = forwardRef<LegalIssueListHandles, LegalIssueListProps>(
         !isNaN(index) &&
         index >= -1
       ) {
-        scrollRef.current?.scrollToIndex({ index, animated: true });
+        scrollRef.current?.scrollToOffset({
+          animated: true,
+          offset: index * (RFValue(300) + 16),
+        });
       }
     }
 
@@ -99,7 +110,10 @@ const LegalIssueList = forwardRef<LegalIssueListHandles, LegalIssueListProps>(
         !isNaN(index) &&
         index >= -1
       ) {
-        scrollRef.current?.scrollToIndex({ index, animated: true });
+        scrollRef.current?.scrollToOffset({
+          animated: true,
+          offset: index * (RFValue(300) + 16),
+        });
       }
     }
 
@@ -136,7 +150,25 @@ const LegalIssueList = forwardRef<LegalIssueListHandles, LegalIssueListProps>(
       }
     }
 
-    return !timelineManager.isFullfilled || (!!data && data.length > 0)  ? (
+    function onSearchFilter(item: ILegal) {
+      if (
+        item.inventoryName
+          .toLowerCase()
+          .includes(props.searchQuery.toLowerCase())
+      ) {
+        return true;
+      }
+      return false;
+    }
+
+    function onCampusFilter(item: ILegal) {
+      if(selectedCampus.id === -1) return true;
+      
+      return selectedCampus.id === item.campusID;
+      
+    }
+
+    return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
       <IssueFlatList
         ItemComponent={LegalIssueItem}
         refreshing={timelineManager.isPending}

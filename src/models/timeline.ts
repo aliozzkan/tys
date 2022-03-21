@@ -243,3 +243,43 @@ export interface IControlTask {
   statusColor: string;
   statusDesc: string;
 }
+
+export interface ICounter {
+  counterID: number;
+  counterTypeId: number;
+  counterTaskID: number;
+  counterTypeName: string;
+  barcode: string;
+  location: string;
+  isTRequired: boolean;
+  isT1Required: boolean;
+  isT2Required: boolean;
+  isT3Required: boolean;
+  isKapasitifRequired: boolean;
+  isReaktifRequired: boolean;
+  isDemantRequired: boolean;
+  periodId: number;
+  periodName: string;
+  startDate: string;
+  beforeDate: string;
+  endDate: string;
+  t?: any;
+  t1?: any;
+  t2?: any;
+  t3?: any;
+  kapasitif?: any;
+  reaktif?: any;
+  demant?: any;
+  value?: any;
+  description?: any;
+  photoPath?: any;
+  controlledUserID?: any;
+  controlledUserName?: any;
+  isCompleted: boolean;
+  completedDate?: any;
+  statusCode: number;
+  statusColor: string;
+  statusDesc: string;
+  multiplierValue: number;
+  consumptionDifferencePercentage: number;
+}

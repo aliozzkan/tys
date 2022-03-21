@@ -1,7 +1,9 @@
-import { Box } from "../";
 import React, { FC } from "react";
 import { FlatList, RefreshControl } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
+
 import { spacing } from "../../theme";
+import { Box } from "../";
 
 interface Props {
   onRefresh: () => void;
@@ -16,14 +18,22 @@ const IssueFlatList: FC<Props> = (props) => {
   return (
     <FlatList
       ref={props.scrollRef}
-      ItemSeparatorComponent={() => <Box my="s" />}
+      ItemSeparatorComponent={() => (
+        <Box my="zero" style={{ marginBottom: 16 }} />
+      )}
       contentContainerStyle={{ padding: spacing.m }}
       data={props.data || null}
-      renderItem={({ item }) => <props.ItemComponent data={item} />}
+      renderItem={({ item, index }) => (
+        <props.ItemComponent data={item} index={index} />
+      )}
       keyExtractor={(item, index) => `${item.id}-${index}`}
-      initialNumToRender={props.data?.length || 10}
+      initialNumToRender={10}
+      getItemLayout={(_, index) => ({
+        index: index,
+        length: 350,
+        offset: index * (RFValue(300) + 16),
+      })}
       onScrollToIndexFailed={(info) => {
-        console.log(info)
       }}
       refreshControl={
         !!props.noRefresh ? undefined : (

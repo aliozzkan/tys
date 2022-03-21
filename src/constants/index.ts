@@ -1,7 +1,7 @@
 export enum api {
   siemens,
   test,
-  apl
+  apl,
 }
 
-export const __mode__: api = api.apl;
+export const __mode__: api = api.test;

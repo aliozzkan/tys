@@ -8,6 +8,7 @@ import DoLegalIssueStack from './stacks/LegalIssue/LegalIssueDoStack'
 import DoDemandIssueStack from './stacks/DemandIssue/DemandIssueDo'
 import DoFollowDocIssueStack from './stacks/FollowDoc/FollowDocDoStack'
 import DoControlTaskIssueStack from './stacks/ControlTask/ControlTaskDoStack'
+import DoCounterIssueStack from './stacks/Counter/CounterDoStack'
 import AccountStack from './stacks/Account/AccountStack'
 
 type Routes = {
@@ -49,6 +50,10 @@ const MainNavigator = () => {
       <MainStack.Screen
         name="DoControlTaskIssueStack"
         component={DoControlTaskIssueStack}
+      />
+      <MainStack.Screen
+        name="DoCounterIssueStack"
+        component={DoCounterIssueStack}
       />
       <MainStack.Screen
         name="AccountStack"

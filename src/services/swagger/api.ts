@@ -102,6 +102,12 @@ export interface AddDemandDocumentDTO {
     demandID?: number;
     /**
      * 
+     * @type {number}
+     * @memberof AddDemandDocumentDTO
+     */
+    assignUserID?: number | null;
+    /**
+     * 
      * @type {string}
      * @memberof AddDemandDocumentDTO
      */
@@ -932,6 +938,62 @@ export interface Control {
      * @memberof Control
      */
     createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface ControlAndTypeListDTO
+ */
+export interface ControlAndTypeListDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof ControlAndTypeListDTO
+     */
+    controlID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ControlAndTypeListDTO
+     */
+    controlName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ControlAndTypeListDTO
+     */
+    controlDescription?: string | null;
+    /**
+     * 
+     * @type {Array<ControlTaskDTO>}
+     * @memberof ControlAndTypeListDTO
+     */
+    controlTaskList?: Array<ControlTaskDTO> | null;
+}
+/**
+ * 
+ * @export
+ * @interface ControlAndTypeListDTOListDataResult
+ */
+export interface ControlAndTypeListDTOListDataResult {
+    /**
+     * 
+     * @type {Array<ControlAndTypeListDTO>}
+     * @memberof ControlAndTypeListDTOListDataResult
+     */
+    data?: Array<ControlAndTypeListDTO> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ControlAndTypeListDTOListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof ControlAndTypeListDTOListDataResult
+     */
+    message?: string | null;
 }
 /**
  * 
@@ -2089,6 +2151,670 @@ export interface ControlTimelineDTOListDataResult {
 /**
  * 
  * @export
+ * @interface Counter
+ */
+export interface Counter {
+    /**
+     * 
+     * @type {number}
+     * @memberof Counter
+     */
+    id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Counter
+     */
+    projectID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof Counter
+     */
+    counterTypeID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Counter
+     */
+    barcode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof Counter
+     */
+    location?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof Counter
+     */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Counter
+     */
+    createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CounterMaintenanceTypeAddDTO
+ */
+export interface CounterMaintenanceTypeAddDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    counterID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    counterPeriodID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    startDate?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    beforeDay?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isTRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isT1Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isT2Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isT3Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isKapasitifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isReaktifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    isDemantRequired?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    addedUserID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    multiplierValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeAddDTO
+     */
+    consumptionDifferencePercentage?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CounterMaintenanceTypeDTO
+ */
+export interface CounterMaintenanceTypeDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    counterID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    counterBarcode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    counterLocation?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    counterPeriodID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    counterPeriodName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    startDate?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    beforeDay?: number;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isTRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isT1Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isT2Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isT3Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isKapasitifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isReaktifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isDemantRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    addedUserID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    addedUserIName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    createDate?: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    multiplierValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterMaintenanceTypeDTO
+     */
+    consumptionDifferencePercentage?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CounterMaintenanceTypeDTOListDataResult
+ */
+export interface CounterMaintenanceTypeDTOListDataResult {
+    /**
+     * 
+     * @type {Array<CounterMaintenanceTypeDTO>}
+     * @memberof CounterMaintenanceTypeDTOListDataResult
+     */
+    data?: Array<CounterMaintenanceTypeDTO> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterMaintenanceTypeDTOListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterMaintenanceTypeDTOListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CounterPeriod
+ */
+export interface CounterPeriod {
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterPeriod
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterPeriod
+     */
+    name?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterPeriod
+     */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterPeriod
+     */
+    createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CounterPeriodListDataResult
+ */
+export interface CounterPeriodListDataResult {
+    /**
+     * 
+     * @type {Array<CounterPeriod>}
+     * @memberof CounterPeriodListDataResult
+     */
+    data?: Array<CounterPeriod> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterPeriodListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterPeriodListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CounterTimeLine
+ */
+export interface CounterTimeLine {
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    counterTaskID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    counterID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    barcode?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    location?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isTRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isT1Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isT2Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isT3Required?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isKapasitifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isReaktifRequired?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isDemantRequired?: boolean;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    periodId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    periodName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    counterTypeId?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    counterTypeName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    startDate?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    beforeDate?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    endDate?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    t?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    t1?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    t2?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    t3?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    kapasitif?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    reaktif?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    demant?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    value?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    description?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    photoPath?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    controlledUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    controlledUserName?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLine
+     */
+    isCompleted?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    completedDate?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    statusCode?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    statusColor?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLine
+     */
+    statusDesc?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    multiplierValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterTimeLine
+     */
+    consumptionDifferencePercentage?: number;
+}
+/**
+ * 
+ * @export
+ * @interface CounterTimeLineListDataResult
+ */
+export interface CounterTimeLineListDataResult {
+    /**
+     * 
+     * @type {Array<CounterTimeLine>}
+     * @memberof CounterTimeLineListDataResult
+     */
+    data?: Array<CounterTimeLine> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTimeLineListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTimeLineListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface CounterType
+ */
+export interface CounterType {
+    /**
+     * 
+     * @type {number}
+     * @memberof CounterType
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterType
+     */
+    name?: string | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterType
+     */
+    isActive?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterType
+     */
+    createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface CounterTypeListDataResult
+ */
+export interface CounterTypeListDataResult {
+    /**
+     * 
+     * @type {Array<CounterType>}
+     * @memberof CounterTypeListDataResult
+     */
+    data?: Array<CounterType> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof CounterTypeListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof CounterTypeListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface Demand
  */
 export interface Demand {
@@ -2174,6 +2900,135 @@ export interface Demand {
 /**
  * 
  * @export
+ * @interface DemandAndAllDocumentDTO
+ */
+export interface DemandAndAllDocumentDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandAndAllDocumentDTO
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentDTO
+     */
+    name?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentDTO
+     */
+    explain?: string | null;
+    /**
+     * 
+     * @type {Array<DemandAndAllDocumentItemDTO>}
+     * @memberof DemandAndAllDocumentDTO
+     */
+    demandDocuments?: Array<DemandAndAllDocumentItemDTO> | null;
+}
+/**
+ * 
+ * @export
+ * @interface DemandAndAllDocumentDTOListDataResult
+ */
+export interface DemandAndAllDocumentDTOListDataResult {
+    /**
+     * 
+     * @type {Array<DemandAndAllDocumentDTO>}
+     * @memberof DemandAndAllDocumentDTOListDataResult
+     */
+    data?: Array<DemandAndAllDocumentDTO> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DemandAndAllDocumentDTOListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentDTOListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface DemandAndAllDocumentItemDTO
+ */
+export interface DemandAndAllDocumentItemDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    assignUserName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    documentName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    lastDate?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    isCompleted?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    createDate?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    path?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    completedUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    completedUserName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandAndAllDocumentItemDTO
+     */
+    completedDate?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface DemandDocument
  */
 export interface DemandDocument {
@@ -2189,6 +3044,12 @@ export interface DemandDocument {
      * @memberof DemandDocument
      */
     demandID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DemandDocument
+     */
+    assignUserID?: number | null;
     /**
      * 
      * @type {string}
@@ -2466,6 +3327,18 @@ export interface DemandReportDocumentDTO {
     demandID?: number;
     /**
      * 
+     * @type {number}
+     * @memberof DemandReportDocumentDTO
+     */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DemandReportDocumentDTO
+     */
+    assignUserName?: string | null;
+    /**
+     * 
      * @type {string}
      * @memberof DemandReportDocumentDTO
      */
@@ -2518,6 +3391,103 @@ export interface DemandReportDocumentDTO {
      * @memberof DemandReportDocumentDTO
      */
     createDate?: string;
+}
+/**
+ * 
+ * @export
+ * @interface DoCounterMaintenanceModel
+ */
+export interface DoCounterMaintenanceModel {
+    /**
+     * 
+     * @type {number}
+     * @memberof DoCounterMaintenanceModel
+     */
+    id?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DoCounterMaintenanceModel
+     */
+    controlledUserID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    t?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    t1?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    t2?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    t3?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    kapasitif?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    reaktif?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    demant?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    value?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    description?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    photo?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DoCounterMaintenanceModel
+     */
+    photoExtension?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DoCounterMaintenanceModel
+     */
+    multiplierValue?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DoCounterMaintenanceModel
+     */
+    consumptionDifferencePercentage?: number;
 }
 /**
  * 
@@ -2665,6 +3635,12 @@ export interface Document {
      * @type {number}
      * @memberof Document
      */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof Document
+     */
     projectID?: number;
     /**
      * 
@@ -2760,6 +3736,62 @@ export interface Document {
 /**
  * 
  * @export
+ * @interface DocumentAndTypeDTO
+ */
+export interface DocumentAndTypeDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentAndTypeDTO
+     */
+    id?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentAndTypeDTO
+     */
+    documentName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentAndTypeDTO
+     */
+    explain?: string | null;
+    /**
+     * 
+     * @type {Array<DocumentMaintenanceTypeDTO>}
+     * @memberof DocumentAndTypeDTO
+     */
+    typeList?: Array<DocumentMaintenanceTypeDTO> | null;
+}
+/**
+ * 
+ * @export
+ * @interface DocumentAndTypeDTOListDataResult
+ */
+export interface DocumentAndTypeDTOListDataResult {
+    /**
+     * 
+     * @type {Array<DocumentAndTypeDTO>}
+     * @memberof DocumentAndTypeDTOListDataResult
+     */
+    data?: Array<DocumentAndTypeDTO> | null;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof DocumentAndTypeDTOListDataResult
+     */
+    success?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentAndTypeDTOListDataResult
+     */
+    message?: string | null;
+}
+/**
+ * 
+ * @export
  * @interface DocumentDTO
  */
 export interface DocumentDTO {
@@ -2775,6 +3807,18 @@ export interface DocumentDTO {
      * @memberof DocumentDTO
      */
     userTypeID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentDTO
+     */
+    assignUserName?: string | null;
     /**
      * 
      * @type {string}
@@ -3196,6 +4240,18 @@ export interface DocumentReportDTO {
      * @type {number}
      * @memberof DocumentReportDTO
      */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentReportDTO
+     */
+    assignUserName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentReportDTO
+     */
     documentID?: number;
     /**
      * 
@@ -3535,6 +4591,18 @@ export interface DocumentTimelineDTO {
      * @memberof DocumentTimelineDTO
      */
     documentID?: number;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentTimelineDTO
+     */
+    assignUserID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentTimelineDTO
+     */
+    assignUserName?: string | null;
     /**
      * 
      * @type {string}
@@ -4544,6 +5612,25 @@ export interface LegalDocument {
      * @memberof LegalDocument
      */
     document?: string | null;
+}
+/**
+ * 
+ * @export
+ * @interface LegalInspectionMaintenanceEndDateDTO
+ */
+export interface LegalInspectionMaintenanceEndDateDTO {
+    /**
+     * 
+     * @type {number}
+     * @memberof LegalInspectionMaintenanceEndDateDTO
+     */
+    legalInspectionID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof LegalInspectionMaintenanceEndDateDTO
+     */
+    endDate?: string;
 }
 /**
  * 
@@ -6757,6 +7844,44 @@ export const ControlTaskApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
+         * @summary denetimleri ve o denetime ait bakım tiplerini listerler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskGetControlAndTypeListDGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/ControlTask/GetControlAndTypeListD`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary denetim için;denetimleri listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -7046,6 +8171,38 @@ export const ControlTaskApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskNotCompletedControlTaskForEmailGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/ControlTask/NotCompletedControlTaskForEmail`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
@@ -7075,6 +8232,102 @@ export const ControlTaskApiAxiosParamCreator = function (configuration?: Configu
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             localVarRequestOptions.data = serializeDataIfNeeded(control, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol sorusunu günceller - soru ve durumu
+         * @param {number} [questionId] 
+         * @param {string} [question] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskUpdateControlQuestionGet: async (questionId?: number, question?: string, isActive?: boolean, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/ControlTask/UpdateControlQuestion`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (questionId !== undefined) {
+                localVarQueryParameter['questionId'] = questionId;
+            }
+
+            if (question !== undefined) {
+                localVarQueryParameter['question'] = question;
+            }
+
+            if (isActive !== undefined) {
+                localVarQueryParameter['isActive'] = isActive;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol soru grup u günceller - adı ve durumu
+         * @param {number} [questionGroupId] 
+         * @param {string} [name] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskUpdateControlQuestionGroupGet: async (questionGroupId?: number, name?: string, isActive?: boolean, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/ControlTask/UpdateControlQuestionGroup`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (questionGroupId !== undefined) {
+                localVarQueryParameter['questionGroupId'] = questionGroupId;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (isActive !== undefined) {
+                localVarQueryParameter['isActive'] = isActive;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -7206,6 +8459,17 @@ export const ControlTaskApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary denetimleri ve o denetime ait bakım tiplerini listerler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiControlTaskGetControlAndTypeListDGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ControlAndTypeListDTOListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiControlTaskGetControlAndTypeListDGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary denetim için;denetimleri listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -7291,6 +8555,15 @@ export const ControlTaskApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiControlTaskNotCompletedControlTaskForEmailGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiControlTaskNotCompletedControlTaskForEmailGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
@@ -7298,6 +8571,32 @@ export const ControlTaskApiFp = function(configuration?: Configuration) {
          */
         async apiControlTaskUpdateControlPost(control?: Control, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiControlTaskUpdateControlPost(control, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol sorusunu günceller - soru ve durumu
+         * @param {number} [questionId] 
+         * @param {string} [question] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiControlTaskUpdateControlQuestionGet(questionId?: number, question?: string, isActive?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiControlTaskUpdateControlQuestionGet(questionId, question, isActive, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol soru grup u günceller - adı ve durumu
+         * @param {number} [questionGroupId] 
+         * @param {string} [name] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiControlTaskUpdateControlQuestionGroupGet(questionGroupId?: number, name?: string, isActive?: boolean, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiControlTaskUpdateControlQuestionGroupGet(questionGroupId, name, isActive, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -7392,6 +8691,16 @@ export const ControlTaskApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
+         * @summary denetimleri ve o denetime ait bakım tiplerini listerler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskGetControlAndTypeListDGet(projectId?: number, options?: any): AxiosPromise<ControlAndTypeListDTOListDataResult> {
+            return localVarFp.apiControlTaskGetControlAndTypeListDGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary denetim için;denetimleri listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -7469,6 +8778,14 @@ export const ControlTaskApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskNotCompletedControlTaskForEmailGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiControlTaskNotCompletedControlTaskForEmailGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary denetim için; denetim günceller
          * @param {Control} [control] 
          * @param {*} [options] Override http request option.
@@ -7476,6 +8793,30 @@ export const ControlTaskApiFactory = function (configuration?: Configuration, ba
          */
         apiControlTaskUpdateControlPost(control?: Control, options?: any): AxiosPromise<Result> {
             return localVarFp.apiControlTaskUpdateControlPost(control, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol sorusunu günceller - soru ve durumu
+         * @param {number} [questionId] 
+         * @param {string} [question] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskUpdateControlQuestionGet(questionId?: number, question?: string, isActive?: boolean, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiControlTaskUpdateControlQuestionGet(questionId, question, isActive, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary denetim için; kontrol soru grup u günceller - adı ve durumu
+         * @param {number} [questionGroupId] 
+         * @param {string} [name] 
+         * @param {boolean} [isActive] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiControlTaskUpdateControlQuestionGroupGet(questionGroupId?: number, name?: string, isActive?: boolean, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiControlTaskUpdateControlQuestionGroupGet(questionGroupId, name, isActive, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -7582,6 +8923,18 @@ export class ControlTaskApi extends BaseAPI {
 
     /**
      * 
+     * @summary denetimleri ve o denetime ait bakım tiplerini listerler
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ControlTaskApi
+     */
+    public apiControlTaskGetControlAndTypeListDGet(projectId?: number, options?: any) {
+        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlAndTypeListDGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary denetim için;denetimleri listeler
      * @param {number} [projectId] 
      * @param {*} [options] Override http request option.
@@ -7675,6 +9028,16 @@ export class ControlTaskApi extends BaseAPI {
 
     /**
      * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ControlTaskApi
+     */
+    public apiControlTaskNotCompletedControlTaskForEmailGet(options?: any) {
+        return ControlTaskApiFp(this.configuration).apiControlTaskNotCompletedControlTaskForEmailGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary denetim için; denetim günceller
      * @param {Control} [control] 
      * @param {*} [options] Override http request option.
@@ -7687,6 +9050,34 @@ export class ControlTaskApi extends BaseAPI {
 
     /**
      * 
+     * @summary denetim için; kontrol sorusunu günceller - soru ve durumu
+     * @param {number} [questionId] 
+     * @param {string} [question] 
+     * @param {boolean} [isActive] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ControlTaskApi
+     */
+    public apiControlTaskUpdateControlQuestionGet(questionId?: number, question?: string, isActive?: boolean, options?: any) {
+        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlQuestionGet(questionId, question, isActive, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary denetim için; kontrol soru grup u günceller - adı ve durumu
+     * @param {number} [questionGroupId] 
+     * @param {string} [name] 
+     * @param {boolean} [isActive] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ControlTaskApi
+     */
+    public apiControlTaskUpdateControlQuestionGroupGet(questionGroupId?: number, name?: string, isActive?: boolean, options?: any) {
+        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlQuestionGroupGet(questionGroupId, name, isActive, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary denetim için; kontrole ait görevi günceller
      * @param {ControlTask} [controlTask] 
      * @param {*} [options] Override http request option.
@@ -7695,6 +9086,778 @@ export class ControlTaskApi extends BaseAPI {
      */
     public apiControlTaskUpdateControlTaskPost(controlTask?: ControlTask, options?: any) {
         return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlTaskPost(controlTask, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+/**
+ * CounterApi - axios parameter creator
+ * @export
+ */
+export const CounterApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary sayaça bakım ekler
+         * @param {CounterMaintenanceTypeAddDTO} [counterMaintenanceTypeAddDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterAddCounterMaintenanceTypePost: async (counterMaintenanceTypeAddDTO?: CounterMaintenanceTypeAddDTO, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/AddCounterMaintenanceType`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(counterMaintenanceTypeAddDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç ekler
+         * @param {Counter} [counter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterAddCounterPost: async (counter?: Counter, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/AddCounter`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(counter, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary projedeki sayaçları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterListByProjectIdGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/CounterListByProjectId`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaça bakılarını üretir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterMaintenanceTypeGenerateGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/CounterMaintenanceTypeGenerate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç timeline
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterTimelineGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/CounterTimeline`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç timeline durumlarını verir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterTimelineStatusGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/CounterTimelineStatus`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç okuma işlemi yapılır.
+         * @param {DoCounterMaintenanceModel} [doCounterMaintenanceModel] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterDoCounterMaintenancePost: async (doCounterMaintenanceModel?: DoCounterMaintenanceModel, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/DoCounterMaintenance`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(doCounterMaintenanceModel, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç bakılarını listeler
+         * @param {number} [counterId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterMaintenanceTypeListGet: async (counterId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/GetCounterMaintenanceTypeList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (counterId !== undefined) {
+                localVarQueryParameter['counterId'] = counterId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç periyoflarını listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterPeriodListGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/GetCounterPeriodList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary sayaç bakım tiplerini listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterTypeListGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/GetCounterTypeList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterNotCompletedCounterTaskDTOGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Counter/NotCompletedCounterTaskDTO`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * CounterApi - functional programming interface
+ * @export
+ */
+export const CounterApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CounterApiAxiosParamCreator(configuration)
+    return {
+        /**
+         * 
+         * @summary sayaça bakım ekler
+         * @param {CounterMaintenanceTypeAddDTO} [counterMaintenanceTypeAddDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO?: CounterMaintenanceTypeAddDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç ekler
+         * @param {Counter} [counter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterAddCounterPost(counter?: Counter, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterAddCounterPost(counter, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary projedeki sayaçları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterCounterListByProjectIdGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterCounterListByProjectIdGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaça bakılarını üretir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterCounterMaintenanceTypeGenerateGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterCounterMaintenanceTypeGenerateGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç timeline
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterCounterTimelineGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CounterTimeLineListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterCounterTimelineGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç timeline durumlarını verir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterCounterTimelineStatusGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimelineStatusCodeDTOListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterCounterTimelineStatusGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç okuma işlemi yapılır.
+         * @param {DoCounterMaintenanceModel} [doCounterMaintenanceModel] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel?: DoCounterMaintenanceModel, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç bakılarını listeler
+         * @param {number} [counterId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterGetCounterMaintenanceTypeListGet(counterId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CounterMaintenanceTypeDTOListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterGetCounterMaintenanceTypeListGet(counterId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç periyoflarını listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterGetCounterPeriodListGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CounterPeriodListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterGetCounterPeriodListGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @summary sayaç bakım tiplerini listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterGetCounterTypeListGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CounterTypeListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterGetCounterTypeListGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiCounterNotCompletedCounterTaskDTOGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterNotCompletedCounterTaskDTOGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+    }
+};
+
+/**
+ * CounterApi - factory interface
+ * @export
+ */
+export const CounterApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CounterApiFp(configuration)
+    return {
+        /**
+         * 
+         * @summary sayaça bakım ekler
+         * @param {CounterMaintenanceTypeAddDTO} [counterMaintenanceTypeAddDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO?: CounterMaintenanceTypeAddDTO, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç ekler
+         * @param {Counter} [counter] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterAddCounterPost(counter?: Counter, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterAddCounterPost(counter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary projedeki sayaçları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterListByProjectIdGet(projectId?: number, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterCounterListByProjectIdGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaça bakılarını üretir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterMaintenanceTypeGenerateGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterCounterMaintenanceTypeGenerateGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç timeline
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterTimelineGet(projectId?: number, options?: any): AxiosPromise<CounterTimeLineListDataResult> {
+            return localVarFp.apiCounterCounterTimelineGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç timeline durumlarını verir
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterCounterTimelineStatusGet(options?: any): AxiosPromise<TimelineStatusCodeDTOListDataResult> {
+            return localVarFp.apiCounterCounterTimelineStatusGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç okuma işlemi yapılır.
+         * @param {DoCounterMaintenanceModel} [doCounterMaintenanceModel] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel?: DoCounterMaintenanceModel, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç bakılarını listeler
+         * @param {number} [counterId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterMaintenanceTypeListGet(counterId?: number, options?: any): AxiosPromise<CounterMaintenanceTypeDTOListDataResult> {
+            return localVarFp.apiCounterGetCounterMaintenanceTypeListGet(counterId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç periyoflarını listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterPeriodListGet(options?: any): AxiosPromise<CounterPeriodListDataResult> {
+            return localVarFp.apiCounterGetCounterPeriodListGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary sayaç bakım tiplerini listeler
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterGetCounterTypeListGet(options?: any): AxiosPromise<CounterTypeListDataResult> {
+            return localVarFp.apiCounterGetCounterTypeListGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiCounterNotCompletedCounterTaskDTOGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiCounterNotCompletedCounterTaskDTOGet(options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CounterApi - object-oriented interface
+ * @export
+ * @class CounterApi
+ * @extends {BaseAPI}
+ */
+export class CounterApi extends BaseAPI {
+    /**
+     * 
+     * @summary sayaça bakım ekler
+     * @param {CounterMaintenanceTypeAddDTO} [counterMaintenanceTypeAddDTO] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO?: CounterMaintenanceTypeAddDTO, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterAddCounterMaintenanceTypePost(counterMaintenanceTypeAddDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç ekler
+     * @param {Counter} [counter] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterAddCounterPost(counter?: Counter, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterAddCounterPost(counter, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary projedeki sayaçları listeler
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterCounterListByProjectIdGet(projectId?: number, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterCounterListByProjectIdGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaça bakılarını üretir
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterCounterMaintenanceTypeGenerateGet(options?: any) {
+        return CounterApiFp(this.configuration).apiCounterCounterMaintenanceTypeGenerateGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç timeline
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterCounterTimelineGet(projectId?: number, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterCounterTimelineGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç timeline durumlarını verir
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterCounterTimelineStatusGet(options?: any) {
+        return CounterApiFp(this.configuration).apiCounterCounterTimelineStatusGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç okuma işlemi yapılır.
+     * @param {DoCounterMaintenanceModel} [doCounterMaintenanceModel] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel?: DoCounterMaintenanceModel, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç bakılarını listeler
+     * @param {number} [counterId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterGetCounterMaintenanceTypeListGet(counterId?: number, options?: any) {
+        return CounterApiFp(this.configuration).apiCounterGetCounterMaintenanceTypeListGet(counterId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç periyoflarını listeler
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterGetCounterPeriodListGet(options?: any) {
+        return CounterApiFp(this.configuration).apiCounterGetCounterPeriodListGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary sayaç bakım tiplerini listeler
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterGetCounterTypeListGet(options?: any) {
+        return CounterApiFp(this.configuration).apiCounterGetCounterTypeListGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CounterApi
+     */
+    public apiCounterNotCompletedCounterTaskDTOGet(options?: any) {
+        return CounterApiFp(this.configuration).apiCounterNotCompletedCounterTaskDTOGet(options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -7818,6 +9981,44 @@ export const DemandApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @summary talepleri ve taleplere ait dokumanları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandAndDocumentListGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Demand/GetDemandAndDocumentList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Talep e ait belgeleri listeler
          * @param {number} [demandId] 
          * @param {*} [options] Override http request option.
@@ -7918,6 +10119,38 @@ export const DemandApiAxiosParamCreator = function (configuration?: Configuratio
             if (projectId !== undefined) {
                 localVarQueryParameter['projectId'] = projectId;
             }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandListPastLastDateForDailyEmailGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Demand/GetDemandListPastLastDateForDailyEmail`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
 
     
@@ -8237,6 +10470,17 @@ export const DemandApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary talepleri ve taleplere ait dokumanları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDemandGetDemandAndDocumentListGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DemandAndAllDocumentDTOListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandGetDemandAndDocumentListGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Talep e ait belgeleri listeler
          * @param {number} [demandId] 
          * @param {*} [options] Override http request option.
@@ -8266,6 +10510,15 @@ export const DemandApiFp = function(configuration?: Configuration) {
          */
         async apiDemandGetDemandListByProjectIDGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandGetDemandListByProjectIDGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDemandGetDemandListPastLastDateForDailyEmailGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDemandGetDemandListPastLastDateForDailyEmailGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -8387,6 +10640,16 @@ export const DemandApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @summary talepleri ve taleplere ait dokumanları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandAndDocumentListGet(projectId?: number, options?: any): AxiosPromise<DemandAndAllDocumentDTOListDataResult> {
+            return localVarFp.apiDemandGetDemandAndDocumentListGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Talep e ait belgeleri listeler
          * @param {number} [demandId] 
          * @param {*} [options] Override http request option.
@@ -8414,6 +10677,14 @@ export const DemandApiFactory = function (configuration?: Configuration, basePat
          */
         apiDemandGetDemandListByProjectIDGet(projectId?: number, options?: any): AxiosPromise<void> {
             return localVarFp.apiDemandGetDemandListByProjectIDGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDemandGetDemandListPastLastDateForDailyEmailGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiDemandGetDemandListPastLastDateForDailyEmailGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -8533,6 +10804,18 @@ export class DemandApi extends BaseAPI {
 
     /**
      * 
+     * @summary talepleri ve taleplere ait dokumanları listeler
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DemandApi
+     */
+    public apiDemandGetDemandAndDocumentListGet(projectId?: number, options?: any) {
+        return DemandApiFp(this.configuration).apiDemandGetDemandAndDocumentListGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Talep e ait belgeleri listeler
      * @param {number} [demandId] 
      * @param {*} [options] Override http request option.
@@ -8565,6 +10848,16 @@ export class DemandApi extends BaseAPI {
      */
     public apiDemandGetDemandListByProjectIDGet(projectId?: number, options?: any) {
         return DemandApiFp(this.configuration).apiDemandGetDemandListByProjectIDGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DemandApi
+     */
+    public apiDemandGetDemandListPastLastDateForDailyEmailGet(options?: any) {
+        return DemandApiFp(this.configuration).apiDemandGetDemandListPastLastDateForDailyEmailGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -8842,6 +11135,44 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @summary Dokumanları ve dokumana ait bakımları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentGetDocumentAndTypeListGet: async (projectId?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Document/GetDocumentAndTypeList`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (projectId !== undefined) {
+                localVarQueryParameter['projectId'] = projectId;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Dokumanları listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -9060,6 +11391,38 @@ export const DocumentApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentGetNotCompletedDocumentForDailyEmailGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Document/GetNotCompletedDocumentForDailyEmail`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Dokumana ait bakımı günceller, sadece Question ve IsActive parametresini güncelliyor
          * @param {DocumentMaintenanceType} [documentMaintenanceType] 
          * @param {*} [options] Override http request option.
@@ -9198,6 +11561,17 @@ export const DocumentApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Dokumanları ve dokumana ait bakımları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDocumentGetDocumentAndTypeListGet(projectId?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<DocumentAndTypeDTOListDataResult>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDocumentGetDocumentAndTypeListGet(projectId, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary Dokumanları listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -9258,6 +11632,15 @@ export const DocumentApiFp = function(configuration?: Configuration) {
          */
         async apiDocumentGetDocumentTimelineStatusDescGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TimelineStatusCodeDTOListDataResult>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiDocumentGetDocumentTimelineStatusDescGet(options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiDocumentGetNotCompletedDocumentForDailyEmailGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiDocumentGetNotCompletedDocumentForDailyEmailGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -9343,6 +11726,16 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
+         * @summary Dokumanları ve dokumana ait bakımları listeler
+         * @param {number} [projectId] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentGetDocumentAndTypeListGet(projectId?: number, options?: any): AxiosPromise<DocumentAndTypeDTOListDataResult> {
+            return localVarFp.apiDocumentGetDocumentAndTypeListGet(projectId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Dokumanları listeler
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -9398,6 +11791,14 @@ export const DocumentApiFactory = function (configuration?: Configuration, baseP
          */
         apiDocumentGetDocumentTimelineStatusDescGet(options?: any): AxiosPromise<TimelineStatusCodeDTOListDataResult> {
             return localVarFp.apiDocumentGetDocumentTimelineStatusDescGet(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiDocumentGetNotCompletedDocumentForDailyEmailGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiDocumentGetNotCompletedDocumentForDailyEmailGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -9490,6 +11891,18 @@ export class DocumentApi extends BaseAPI {
 
     /**
      * 
+     * @summary Dokumanları ve dokumana ait bakımları listeler
+     * @param {number} [projectId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentApi
+     */
+    public apiDocumentGetDocumentAndTypeListGet(projectId?: number, options?: any) {
+        return DocumentApiFp(this.configuration).apiDocumentGetDocumentAndTypeListGet(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary Dokumanları listeler
      * @param {number} [projectId] 
      * @param {*} [options] Override http request option.
@@ -9556,6 +11969,16 @@ export class DocumentApi extends BaseAPI {
      */
     public apiDocumentGetDocumentTimelineStatusDescGet(options?: any) {
         return DocumentApiFp(this.configuration).apiDocumentGetDocumentTimelineStatusDescGet(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DocumentApi
+     */
+    public apiDocumentGetNotCompletedDocumentForDailyEmailGet(options?: any) {
+        return DocumentApiFp(this.configuration).apiDocumentGetNotCompletedDocumentForDailyEmailGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12341,6 +14764,38 @@ export const InventoryLegalInspectionApiAxiosParamCreator = function (configurat
         },
         /**
          * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet: async (options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/InventoryLegalInspection/GetInventoryLegalInspectionForDailyMail`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary Yasal Muayene için Timeline bilgilerini verir
          * @param {number} [projectId] 
          * @param {*} [options] Override http request option.
@@ -12485,6 +14940,43 @@ export const InventoryLegalInspectionApiAxiosParamCreator = function (configurat
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary yasal muayene nin bakım bitiş tarihini değiştirir
+         * @param {LegalInspectionMaintenanceEndDateDTO} [legalInspectionMaintenanceEndDateDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost: async (legalInspectionMaintenanceEndDateDTO?: LegalInspectionMaintenanceEndDateDTO, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/InventoryLegalInspection/UpdateLegalInspectionMaintenanceEndDate`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(legalInspectionMaintenanceEndDateDTO, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -12515,6 +15007,15 @@ export const InventoryLegalInspectionApiFp = function(configuration?: Configurat
          */
         async apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO?: InventoryLegalInspectionDoMakeDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -12560,6 +15061,17 @@ export const InventoryLegalInspectionApiFp = function(configuration?: Configurat
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiInventoryLegalInspectionUpdateInventoryLegalInspectionTypePost(inventoryLegalInspectionType, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary yasal muayene nin bakım bitiş tarihini değiştirir
+         * @param {LegalInspectionMaintenanceEndDateDTO} [legalInspectionMaintenanceEndDateDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO?: LegalInspectionMaintenanceEndDateDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -12589,6 +15101,14 @@ export const InventoryLegalInspectionApiFactory = function (configuration?: Conf
          */
         apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO?: InventoryLegalInspectionDoMakeDTO, options?: any): AxiosPromise<void> {
             return localVarFp.apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options?: any): AxiosPromise<Result> {
+            return localVarFp.apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -12629,6 +15149,16 @@ export const InventoryLegalInspectionApiFactory = function (configuration?: Conf
         apiInventoryLegalInspectionUpdateInventoryLegalInspectionTypePost(inventoryLegalInspectionType?: InventoryLegalInspectionType, options?: any): AxiosPromise<void> {
             return localVarFp.apiInventoryLegalInspectionUpdateInventoryLegalInspectionTypePost(inventoryLegalInspectionType, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @summary yasal muayene nin bakım bitiş tarihini değiştirir
+         * @param {LegalInspectionMaintenanceEndDateDTO} [legalInspectionMaintenanceEndDateDTO] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO?: LegalInspectionMaintenanceEndDateDTO, options?: any): AxiosPromise<void> {
+            return localVarFp.apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -12661,6 +15191,16 @@ export class InventoryLegalInspectionApi extends BaseAPI {
      */
     public apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO?: InventoryLegalInspectionDoMakeDTO, options?: any) {
         return InventoryLegalInspectionApiFp(this.configuration).apiInventoryLegalInspectionDoInventoryLegalInspectionMaintenancePost(inventoryLegalInspectionDoMakeDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InventoryLegalInspectionApi
+     */
+    public apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options?: any) {
+        return InventoryLegalInspectionApiFp(this.configuration).apiInventoryLegalInspectionGetInventoryLegalInspectionForDailyMailGet(options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -12708,6 +15248,18 @@ export class InventoryLegalInspectionApi extends BaseAPI {
      */
     public apiInventoryLegalInspectionUpdateInventoryLegalInspectionTypePost(inventoryLegalInspectionType?: InventoryLegalInspectionType, options?: any) {
         return InventoryLegalInspectionApiFp(this.configuration).apiInventoryLegalInspectionUpdateInventoryLegalInspectionTypePost(inventoryLegalInspectionType, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary yasal muayene nin bakım bitiş tarihini değiştirir
+     * @param {LegalInspectionMaintenanceEndDateDTO} [legalInspectionMaintenanceEndDateDTO] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof InventoryLegalInspectionApi
+     */
+    public apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO?: LegalInspectionMaintenanceEndDateDTO, options?: any) {
+        return InventoryLegalInspectionApiFp(this.configuration).apiInventoryLegalInspectionUpdateLegalInspectionMaintenanceEndDatePost(legalInspectionMaintenanceEndDateDTO, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -14031,6 +16583,43 @@ export const MaintenanceQuestionApiAxiosParamCreator = function (configuration?:
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @summary Bakım sorusunu günceller
+         * @param {MaintenanceQuestion} [maintenanceQuestion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiMaintenanceQuestionUpdateMaintenanceQuestionPost: async (maintenanceQuestion?: MaintenanceQuestion, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/MaintenanceQuestion/UpdateMaintenanceQuestion`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(maintenanceQuestion, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -14073,6 +16662,17 @@ export const MaintenanceQuestionApiFp = function(configuration?: Configuration) 
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiMaintenanceQuestionGetMaintenanceQuestionTypeListPost(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
+        /**
+         * 
+         * @summary Bakım sorusunu günceller
+         * @param {MaintenanceQuestion} [maintenanceQuestion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion?: MaintenanceQuestion, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
     }
 };
 
@@ -14111,6 +16711,16 @@ export const MaintenanceQuestionApiFactory = function (configuration?: Configura
          */
         apiMaintenanceQuestionGetMaintenanceQuestionTypeListPost(options?: any): AxiosPromise<MaintenanceQuestionTypeListDataResult> {
             return localVarFp.apiMaintenanceQuestionGetMaintenanceQuestionTypeListPost(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Bakım sorusunu günceller
+         * @param {MaintenanceQuestion} [maintenanceQuestion] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion?: MaintenanceQuestion, options?: any): AxiosPromise<Result> {
+            return localVarFp.apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -14155,6 +16765,18 @@ export class MaintenanceQuestionApi extends BaseAPI {
      */
     public apiMaintenanceQuestionGetMaintenanceQuestionTypeListPost(options?: any) {
         return MaintenanceQuestionApiFp(this.configuration).apiMaintenanceQuestionGetMaintenanceQuestionTypeListPost(options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @summary Bakım sorusunu günceller
+     * @param {MaintenanceQuestion} [maintenanceQuestion] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MaintenanceQuestionApi
+     */
+    public apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion?: MaintenanceQuestion, options?: any) {
+        return MaintenanceQuestionApiFp(this.configuration).apiMaintenanceQuestionUpdateMaintenanceQuestionPost(maintenanceQuestion, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -16035,6 +18657,49 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @summary kullanıcı şifresini sıfırlar
+         * @param {number} [userID] 
+         * @param {string} [newPass] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiUsersPasswordResetGet: async (userID?: number, newPass?: string, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Users/PasswordReset`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (userID !== undefined) {
+                localVarQueryParameter['userID'] = userID;
+            }
+
+            if (newPass !== undefined) {
+                localVarQueryParameter['newPass'] = newPass;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary hangi platformdan bildirim alabileceğini düzenler.
          * @param {number} [userID] 
          * @param {boolean} [emailNotify] 
@@ -16203,6 +18868,43 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {number} [versionNo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiUsersVersionControlGet: async (versionNo?: number, options: any = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Users/VersionControl`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication Bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (versionNo !== undefined) {
+                localVarQueryParameter['versionNo'] = versionNo;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -16322,6 +19024,18 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary kullanıcı şifresini sıfırlar
+         * @param {number} [userID] 
+         * @param {string} [newPass] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiUsersPasswordResetGet(userID?: number, newPass?: string, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiUsersPasswordResetGet(userID, newPass, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary hangi platformdan bildirim alabileceğini düzenler.
          * @param {number} [userID] 
          * @param {boolean} [emailNotify] 
@@ -16366,6 +19080,16 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async apiUsersUpdateUserTypePost(userTypeUpdateDTO?: UserTypeUpdateDTO, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Result>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiUsersUpdateUserTypePost(userTypeUpdateDTO, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
+         * @param {number} [versionNo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiUsersVersionControlGet(versionNo?: number, options?: any): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.apiUsersVersionControlGet(versionNo, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
@@ -16477,6 +19201,17 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @summary kullanıcı şifresini sıfırlar
+         * @param {number} [userID] 
+         * @param {string} [newPass] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiUsersPasswordResetGet(userID?: number, newPass?: string, options?: any): AxiosPromise<void> {
+            return localVarFp.apiUsersPasswordResetGet(userID, newPass, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary hangi platformdan bildirim alabileceğini düzenler.
          * @param {number} [userID] 
          * @param {boolean} [emailNotify] 
@@ -16518,6 +19253,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         apiUsersUpdateUserTypePost(userTypeUpdateDTO?: UserTypeUpdateDTO, options?: any): AxiosPromise<Result> {
             return localVarFp.apiUsersUpdateUserTypePost(userTypeUpdateDTO, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} [versionNo] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiUsersVersionControlGet(versionNo?: number, options?: any): AxiosPromise<void> {
+            return localVarFp.apiUsersVersionControlGet(versionNo, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -16648,6 +19392,19 @@ export class UsersApi extends BaseAPI {
 
     /**
      * 
+     * @summary kullanıcı şifresini sıfırlar
+     * @param {number} [userID] 
+     * @param {string} [newPass] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public apiUsersPasswordResetGet(userID?: number, newPass?: string, options?: any) {
+        return UsersApiFp(this.configuration).apiUsersPasswordResetGet(userID, newPass, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
      * @summary hangi platformdan bildirim alabileceğini düzenler.
      * @param {number} [userID] 
      * @param {boolean} [emailNotify] 
@@ -16696,6 +19453,17 @@ export class UsersApi extends BaseAPI {
      */
     public apiUsersUpdateUserTypePost(userTypeUpdateDTO?: UserTypeUpdateDTO, options?: any) {
         return UsersApiFp(this.configuration).apiUsersUpdateUserTypePost(userTypeUpdateDTO, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {number} [versionNo] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public apiUsersVersionControlGet(versionNo?: number, options?: any) {
+        return UsersApiFp(this.configuration).apiUsersVersionControlGet(versionNo, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

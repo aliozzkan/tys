@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native";
 
 interface MaintenanceIssueItemProps {
   data: IMaintenanceIssue;
+  index: number;
 }
 
 enum MaintenanceStatus {
@@ -48,39 +49,40 @@ const MaintenanceIssueItem: FC<MaintenanceIssueItemProps> = (props) => {
   }
 
   return (
-      <Card variant="timelineItemBig">
-        <Box flexDirection="row" alignItems="flex-start">
-          <Box
-            backgroundColor={
-              props.data.isMaintenanceComplete ? "green.50" : "gray.50"
-            }
-            p="m"
-            pb="xl"
-            width={105}
-            alignItems="center"
-          >
-            <Text variant="header" mt="m">
-              {maintenanceDate.format("DD")}
+    <Card variant="timelineItemBig">
+      <Box flexDirection="row" alignItems="flex-start">
+        <Box
+          backgroundColor={
+            props.data.isMaintenanceComplete ? "green.50" : "gray.50"
+          }
+          p="m"
+          pb="xl"
+          width={105}
+          alignItems="center"
+        >
+          <Text variant="header" mt="m">
+            {maintenanceDate.format("DD")}
+          </Text>
+          <Text variant="body">{maintenanceDate.format("MMMM")}</Text>
+        </Box>
+        <Box p="m" pb="zero" flex={1} width="100%">
+          <Box flexDirection="row" justifyContent="space-between">
+            <Text fontFamily={FontFamily.MonserratSemibold} fontSize={18} lineHeight={18}>
+              {props.data.inventoryName}
             </Text>
-            <Text variant="body">{maintenanceDate.format("MMMM")}</Text>
+            <Box
+              borderRadius="s"
+              style={{
+                backgroundColor:
+                  props.data.maintenanceTransactionStatusColorCode,
+              }}
+              width={20}
+              height={20}
+            />
           </Box>
-          <Box p="m" flex={1} width="100%">
-            <Box flexDirection="row" justifyContent="space-between">
-              <Text fontFamily={FontFamily.MonserratSemibold} fontSize={18}>
-                {props.data.inventoryName}
-              </Text>
-              <Box
-                borderRadius="s"
-                style={{
-                  backgroundColor:
-                    props.data.maintenanceTransactionStatusColorCode,
-                }}
-                width={20}
-                height={20}
-              />
-            </Box>
 
-            <Box height={1} backgroundColor="gray.400" width="100%" mt="s" />
+          <Box height={1} backgroundColor="gray.400" width="100%" mt="s" />
+          <Box >
             <KeyValue title="Tesis" value={props.data.campusName} />
             <KeyValue
               title="Periyot"
@@ -106,85 +108,86 @@ const MaintenanceIssueItem: FC<MaintenanceIssueItemProps> = (props) => {
               alignItems="flex-start"
               justifyContent="space-between"
             >
-              <Text color="gray.600">
+              <Text color="gray.600" fontSize={14} lineHeight={14}>
                 {props.data.maintenanceTransactionStatusDescription}
               </Text>
             </Box>
           </Box>
         </Box>
+      </Box>
 
-        <Box flexDirection="row">
-          {props.data.isMaintenanceComplete ? (
+      <Box flexDirection="row">
+        {props.data.isMaintenanceComplete ? (
+          <Box
+            flex={1}
+            backgroundColor="green.400"
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="center"
+          >
+            <Box mr="s">
+              <Feather name="check" color="white" size={20} />
+            </Box>
+            <Text
+              color="green.50"
+              variant="body"
+              fontFamily={FontFamily.RalewaySemibold}
+            >
+              Gerçekleşti
+            </Text>
+          </Box>
+        ) : [MaintenanceStatus.ready, MaintenanceStatus.late].includes(
+            props.data.maintenanceTransactionStatus
+          ) ? (
+          <TouchableOpacity
+            style={{ flex: 1, height: 50 }}
+            onPress={() => goSide("do")}
+          >
             <Box
               flex={1}
-              backgroundColor="green.400"
+              backgroundColor="blue.400"
               alignItems="center"
-              flexDirection="row"
               justifyContent="center"
             >
-              <Box mr="s">
-                <Feather name="check" color="white" size={20} />
-              </Box>
               <Text
-                color="green.50"
+                color="blue.50"
                 variant="body"
                 fontFamily={FontFamily.RalewaySemibold}
               >
-                Gerçekleşti
+                Bakım Yap
               </Text>
             </Box>
-          ) : [MaintenanceStatus.ready, MaintenanceStatus.late].includes(
-              props.data.maintenanceTransactionStatus
-            ) ? (
-            <TouchableOpacity
-              style={{ flex: 1, height: 50 }}
-              onPress={() => goSide("do")}
-            >
-              <Box
-                flex={1}
-                backgroundColor="blue.400"
-                alignItems="center"
-                justifyContent="center"
-              >
-                <Text
-                  color="blue.50"
-                  variant="body"
-                  fontFamily={FontFamily.RalewaySemibold}
-                >
-                  Bakım Yap
-                </Text>
-              </Box>
-            </TouchableOpacity>
-          ) : (
-            <Box
-              flex={1}
-              backgroundColor="yellow.400"
-              alignItems="center"
-              flexDirection="row"
-              justifyContent="center"
-            >
-              <Box mr="s">
-                <Feather name="clock" color="white" size={20} />
-              </Box>
-              <Text
-                color="green.50"
-                variant="body"
-                fontFamily={FontFamily.RalewaySemibold}
-              >
-                Bakım Bekleniyor
-              </Text>
+          </TouchableOpacity>
+        ) : (
+          <Box
+            flex={1}
+            backgroundColor="yellow.400"
+            alignItems="center"
+            flexDirection="row"
+            justifyContent="center"
+          >
+            <Box mr="s">
+              <Feather name="clock" color="white" size={20} />
             </Box>
-          )}
-          <IssueButton
-            label="Detay"
-            color="gray"
-            onPress={() => {
-              goSide("detail");
-            }}
-            rightIcon="arrow-right"
-          />
-        </Box>
-      </Card>
+            <Text
+              color="green.50"
+              variant="body"
+              fontFamily={FontFamily.RalewaySemibold}
+            >
+              Bakım Bekleniyor
+            </Text>
+          </Box>
+        )}
+        <IssueButton
+          label="Detay"
+          color="gray"
+          onPress={() => {
+            goSide("detail");
+          }}
+          rightIcon="arrow-right"
+        />
+      </Box>
+    </Card>
   );
 };
 

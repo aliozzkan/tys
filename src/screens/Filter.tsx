@@ -22,10 +22,12 @@ const initialValue = {
   maintenanceTypes: [] as any[],
   maintenanceStatus: [] as any[],
   legalStatus: [] as any[],
+  counterTypes: [] as any[],
   userTypes: [] as any[],
   periods: [] as any[],
   completeTypes: [] as any[],
   demandGroup: [] as any[],
+  onlyMe: [1] as any[]
 };
 
 const Filter = (props: any) => {
@@ -73,10 +75,23 @@ const Filter = (props: any) => {
     }));
   }
 
-  console.log({ filterData, prop: props.route.params.filterData });
-
   return (
     <ScrollView>
+      {props?.route?.params?.keys?.includes("onlyMe") && (
+        <Box px="l">
+          <FilterTitle>Kişi</FilterTitle>
+          <Box>
+            <FilterItem
+              label="Sadece Ben"
+              value={filterData.onlyMe.includes(1)}
+              onChange={() => {
+                handleChange("onlyMe", 1);
+              }}
+            />
+          </Box>
+        </Box>
+      )}
+
       {props?.route?.params?.keys?.includes("completeTypes") && (
         <Box px="l">
           <FilterTitle>Durum</FilterTitle>
@@ -93,6 +108,34 @@ const Filter = (props: any) => {
               value={filterData.completeTypes.includes(2)}
               onChange={() => {
                 handleChange("completeTypes", 2);
+              }}
+            />
+          </Box>
+        </Box>
+      )}
+      {props?.route?.params?.keys?.includes("counterTypes") && (
+        <Box px="l">
+          <FilterTitle>Sayaç Türü</FilterTitle>
+          <Box>
+            <FilterItem
+              label="Elektrik"
+              value={filterData.counterTypes.includes(1)}
+              onChange={() => {
+                handleChange("counterTypes", 1);
+              }}
+            />
+            <FilterItem
+              label="Su"
+              value={filterData.counterTypes.includes(2)}
+              onChange={() => {
+                handleChange("counterTypes", 2);
+              }}
+            />
+            <FilterItem
+              label="Doğalgaz"
+              value={filterData.counterTypes.includes(3)}
+              onChange={() => {
+                handleChange("counterTypes", 3);
               }}
             />
           </Box>

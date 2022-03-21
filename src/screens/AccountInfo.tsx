@@ -1,12 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { heightPercentageToDP as hp } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Box, Card, Text, Button } from "../components";
 import { useAuth } from "../hooks/redux-hooks";
 import { Authenticator } from "../helper/authenticator";
+import { AccountStackProps } from "../navigations/stacks/Account/AccountStack";
 
-const AccountInfo = () => {
+const AccountInfo = (props: AccountStackProps<"Info">) => {
   const { user, role, project } = useAuth();
   const insets = useSafeAreaInsets();
   return (
@@ -45,6 +49,23 @@ const AccountInfo = () => {
               <Text variant="bodyHeader">{project.name}</Text>
             </Box>
           </Box>
+        </Box>
+        <Box width={wp(80)} mt="l">
+          <Button
+            label="Bilgilerimi Güncelle"
+            colorScheme="blue"
+            onPress={() => {
+              props.navigation.navigate("Update");
+            }}
+          />
+          <Button
+            label="Şifremi Sıfırla"
+            marginTop="m"
+            colorScheme="teal"
+            onPress={() => {
+              props.navigation.navigate("ChangePassword");
+            }}
+          />
         </Box>
       </Box>
       <Box style={{ marginBottom: insets.bottom + 30, width: "80%" }}>

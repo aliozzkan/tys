@@ -1,8 +1,9 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
+import { Text, View } from "react-native";
 import { AdvancedListHeader, Box } from "../components";
-import DemandIssueList from "../components/organisms/DemandIssueList";
+import CounterList from "../components/organisms/CounterList";
 
-const DemandIssues = (props: any) => {
+const CounterIssuesScreen = (props: any) => {
   const listRef = useRef<any>(null);
   const [search, setSearch] = useState<string>("");
   props.navigation.addListener("focus", () => {
@@ -17,22 +18,26 @@ const DemandIssues = (props: any) => {
         onPressGoToday={() => {
           listRef.current.goToday();
         }}
-        onChangeSearchQuery={text => setSearch(text)}
+        onPressColorDesc={() => {
+          props.navigation.navigate("ColorDesc");
+        }}
+        onChangeSearchQuery={(text) => setSearch(text)}
         onPressFilter={() => {
           props.navigation.navigate("Filter", {
-            backRoute: "DemandIssueList",
+            backRoute: "CounterList",
             filterData: props?.route?.params?.filterData,
-            keys: ["userTypes", "demandGroup", "completeTypes", "onlyMe"],
+            keys: ["completeTypes", "counterTypes"],
           });
         }}
+        noCampus
       />
-      <DemandIssueList
+      <CounterList
         ref={listRef}
-        filterData={props?.route?.params?.filterData as any || {onlyMe: [1]}}
+        filterData={(props?.route?.params?.filterData as any) || {}}
         searchQuery={search}
       />
     </Box>
   );
 };
 
-export default DemandIssues;
+export default CounterIssuesScreen;

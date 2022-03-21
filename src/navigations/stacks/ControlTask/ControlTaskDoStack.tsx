@@ -16,7 +16,11 @@ type Routes = {
 const Stack = createStackNavigator<Routes>();
 const ControlTaskIssueStack = () => (
   <Stack.Navigator screenOptions={{ headerBackTitle: "Geri" }}>
-    <Stack.Screen component={Do} name="ControlTaskDo" options={{ title: "Denetim Gerçekleştir" }} />
+    <Stack.Screen
+      component={Do}
+      name="ControlTaskDo"
+      options={{ title: "Denetim Gerçekleştir" }}
+    />
   </Stack.Navigator>
 );
 

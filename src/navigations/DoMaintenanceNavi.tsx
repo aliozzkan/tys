@@ -13,6 +13,7 @@ import LegalIssueStack from "./stacks/LegalIssue/LegalIssueStack";
 import DemandIssueStack from "./stacks/DemandIssue/DemandIssueStack";
 import FollowDocIssueStack from "./stacks/FollowDoc/FollowDocStack";
 import ControlTaskIssueStack from "./stacks/ControlTask/ControlTaskIssueStack";
+import CounterIssueStack from "./stacks/Counter/CounterIssueStack";
 
 import {Ionicons, FontAwesome, MaterialIcons , MaterialCommunityIcons} from '@expo/vector-icons'
 
@@ -85,6 +86,14 @@ const DoMaintenanceNavi = () => {
         options={{
           tabBarIcon: createIcon("format-list-checkbox"),
           tabBarLabel: createLabel("Denetim"),
+        }}
+      />
+      <DoMaintenanceTabs.Screen
+        name="CounterIssueStack"
+        component={CounterIssueStack}
+        options={{
+          tabBarIcon: createIcon("alarm"),
+          tabBarLabel: createLabel("Sayaç"),
         }}
       />
     </DoMaintenanceTabs.Navigator>

@@ -4,10 +4,10 @@ import { Box, ColorItem } from "../components";
 import { Hooks } from "../services";
 
 const ColorDescScreen = () => {
-  const colorManager = Hooks.DemandTimeline();
+  const colorManager = Hooks.CounterColorDesc();
 
   useLayoutEffect(() => {
-    colorManager.fetch;
+    colorManager.fetch();
   }, []);
 
   if (!colorManager.isFullfilled) {
@@ -26,8 +26,8 @@ const ColorDescScreen = () => {
         renderItem={({ item }) => (
           <ColorItem
             {...{
-              code: item.code,
-              color: item.color,
+              code: item.statusCode,
+              color: item.statusColor,
               desc: item.statusDesc,
             }}
           />

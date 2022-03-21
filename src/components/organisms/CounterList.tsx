@@ -1,23 +1,20 @@
-import {
-  FontAwesome,
-  Ionicons,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React, {
   forwardRef,
   useImperativeHandle,
   useLayoutEffect,
   useRef,
 } from "react";
-import { Box, IssueFlatList } from "../";
 import { useAuth, useRedux } from "../../hooks/redux-hooks";
-import { IDemand } from "../../models/timeline";
 import { Hooks } from "../../services";
-import Text from "../atoms/Text";
-import DemandIssueItem from "./DemandIssueItem";
-import Moment from "moment";
-import { FlatList } from "react-native";
+import Box from "../atoms/Box";
+import IssueFlatList from "../atoms/IssueFlatList";
+import ControlTaskItem from "./ControlTaskItem";
+import { FlatList, Text } from "react-native";
+import CounterItem from "./CounterItem";
 import { RFValue } from "react-native-responsive-fontsize";
+import Moment from "moment";
+import { ICounter } from "../../models/timeline";
 
 interface Props {
   filterData: any;
@@ -29,9 +26,9 @@ interface Handles {
   goUndone: () => void;
 }
 
-const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
+const CounterList = forwardRef<Handles, Props>((props, ref) => {
   const { project, user } = useAuth();
-  const timelineManager = Hooks.DemandTimeline();
+  const timelineManager = Hooks.CounterTaskTimeline();
   const scrollRef = useRef<FlatList>(null);
   const [
     {
@@ -43,29 +40,28 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     timelineManager.fetch(project.id);
   }
 
+  useLayoutEffect(() => {
+    _getList();
+  }, []);
+
   const data = props.filterData
-    ? timelineManager.data?.data.data
-        .filter(onFilter)
-        .filter(onSearchFilter)
-        .filter(onCampusFilter)
-    : timelineManager.data?.data.data
-        .filter(onSearchFilter)
-        .filter(onCampusFilter);
+    ? timelineManager.data?.data.data.filter(onFilter).filter(onSearchFilter)
+    : timelineManager.data?.data.data.filter(onSearchFilter);
 
   function _goUndone() {
     function getIndex(data: any[]) {
       let undoneIndex = 0;
       if (!!data) {
-        data.forEach((item: IDemand, currIndex: number) => {
-          const itemCompleted = item.documents
-            .map((_item) => _item.isCompleted)
-            .includes(false);
-          if (!itemCompleted) {
-            var undoneItem: IDemand = data[undoneIndex];
-            const undoneCompleted = undoneItem.documents
-              .map((_item) => _item.isCompleted)
-              .includes(false);
-            undoneIndex = currIndex;
+        data.forEach((item: ICounter, currIndex: number) => {
+          if (!item.isCompleted) {
+            var undoneItem: ICounter = data[undoneIndex];
+            if (undoneItem.isCompleted) {
+              undoneIndex = currIndex;
+            } else if (
+              Moment(undoneItem.endDate).diff(item.endDate, "seconds") > 0
+            ) {
+              undoneIndex = currIndex;
+            }
           }
         });
       }
@@ -74,11 +70,11 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
 
     const index = getIndex(data);
     if (
-      data &&
-      data.length > 0 &&
+      Array.isArray(data) &&
+      data?.length > 0 &&
       index !== undefined &&
       !isNaN(index) &&
-      index >= -1
+      index >= 0
     ) {
       scrollRef.current?.scrollToOffset({
         animated: true,
@@ -112,11 +108,10 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     }
     const index = getTodayIndex();
     if (
-      data &&
-      data.length > 0 &&
+      Array.isArray(data) &&
+      data?.length > 0 &&
       index !== undefined &&
-      !isNaN(index) &&
-      index >= -1
+      !isNaN(index)
     ) {
       scrollRef.current?.scrollToOffset({
         animated: true,
@@ -125,49 +120,24 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     }
   }
 
-  useLayoutEffect(() => {
-    _getList();
-  }, []);
-
   useImperativeHandle(ref, () => ({
     onRefresh: _getList,
     goToday: _goToday,
     goUndone: _goUndone,
   }));
 
-  function onFilter(item: IDemand) {
+  function onFilter(item: ICounter) {
     if (props.filterData) {
-      const { userTypes, demandGroup, completeTypes, onlyMe } =
+      const { userTypes, completeTypes, onlyMe, counterTypes } =
         props.filterData;
-      const isRequiredDoc = item.documents
-        .map((doc) => doc.isCompleted)
-        .includes(false);
-
       const filters = [];
 
-      if (userTypes?.length > 0) {
-        filters.push(userTypes.includes(item.userTypeID));
-      }
-
       if (completeTypes?.length > 0) {
-        const statu = !isRequiredDoc ? 1 : 2;
-        filters.push(completeTypes.includes(statu));
+        filters.push(completeTypes.includes(item.isCompleted ? 1 : 2));
       }
 
-      if (demandGroup?.length > 0) {
-        filters.push(demandGroup.includes(item.demandGroupID));
-      }
-
-      if (onlyMe?.length > 0) {
-        let isAssign = false;
-        item.documents.some((_document: any) => {
-          if (_document.assignUserID === user.id) {
-            isAssign = true;
-            return true;
-          }
-        });
-
-        filters.push(isAssign);
+      if (counterTypes?.length > 0) {
+        filters.push(counterTypes.includes(item.counterTypeId));
       }
 
       if (filters.length === 0) return true;
@@ -178,28 +148,20 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
     }
   }
 
-  function onSearchFilter(item: IDemand) {
-    if (
-      item.demandName.toLowerCase().includes(props.searchQuery.toLowerCase())
-    ) {
+  function onSearchFilter(item: ICounter) {
+    if (item.location.toLowerCase().includes(props.searchQuery.toLowerCase())) {
       return true;
     }
     return false;
   }
 
-  function onCampusFilter(item: IDemand) {
-    if (selectedCampus.id === -1) return true;
-
-    return item.campusID === selectedCampus.id;
-  }
-
   return !timelineManager.isFullfilled || (!!data && data.length > 0) ? (
     <IssueFlatList
-      ItemComponent={DemandIssueItem}
+      ItemComponent={CounterItem}
       refreshing={timelineManager.isPending}
-      scrollRef={scrollRef}
       onRefresh={_getList}
       data={data}
+      scrollRef={scrollRef}
     />
   ) : (
     <Box flex={1} alignItems="center" justifyContent="center">
@@ -209,4 +171,4 @@ const DemandIssueList = forwardRef<Handles, Props>((props, ref) => {
   );
 });
 
-export default DemandIssueList;
+export default CounterList;

@@ -1,4 +1,4 @@
-import { RFPercentage } from "react-native-responsive-fontsize";
+import { RFValue } from "react-native-responsive-fontsize";
 export const cardVariants = {
   main: {},
   whiteSpace: {
@@ -9,14 +9,14 @@ export const cardVariants = {
   },
   timelineItem: {
     backgroundColor: "white",
-    minHeight: 220,
+    height: RFValue(300),
     borderRadius: "l",
     justifyContent: "space-between",
     overflow: "hidden",
   },
   timelineItemBig: {
     backgroundColor: "white",
-    minHeight: 220,
+    height: RFValue(300),
     borderRadius: "l",
     justifyContent: "space-between",
     overflow: "hidden",

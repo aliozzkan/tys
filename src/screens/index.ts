@@ -23,7 +23,10 @@ export { default as FollowDocUpload } from "./FollowDocUpload";
 export { default as FollowDocColorDesc } from "./FollowDocColorDesc";
 export { default as ControlTaskIssues } from "./ControlTaskIssues";
 export { default as ControlTaskDo } from "./ControlTaskDo";
+export { default as CounterTaskDo } from "./CounterTaskDo";
 export { default as ControlTaskDesc } from "./ControlTaskDesc";
 export { default as AccountInfo } from "./AccountInfo";
+export { default as UpdateInfo } from "./UpdateInfo";
+export { default as ChangePassword } from "./ChangePassword";
 
 export { default as FilterScreen } from "./Filter";
