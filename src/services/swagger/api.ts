@@ -2408,13 +2408,6 @@ export interface CounterMaintenanceTypeDTO {
      * @memberof CounterMaintenanceTypeDTO
      */
     createDate?: string;
-}
-/**
- * 
- * @export
- * @interface DemandAndAllDocumentDTO
- */
-export interface DemandAndAllDocumentDTO {
     /**
      * 
      * @type {number}
@@ -2792,13 +2785,7 @@ export interface CounterType {
      * @type {string}
      * @memberof CounterType
      */
-    createUserName?: string | null;
-    /**
-     * 
-     * @type {Array<DemandReportDocumentDTO>}
-     * @memberof DemandReportDTO
-     */
-    documents?: Array<DemandReportDocumentDTO> | null;
+    createDate?: string;
 }
 /**
  * 
@@ -2933,7 +2920,7 @@ export interface DemandAndAllDocumentDTO {
      * @type {string}
      * @memberof DemandAndAllDocumentDTO
      */
-    firstControlUserName?: string | null;
+    explain?: string | null;
     /**
      * 
      * @type {Array<DemandAndAllDocumentItemDTO>}
@@ -2958,13 +2945,13 @@ export interface DemandAndAllDocumentDTOListDataResult {
      * @type {boolean}
      * @memberof DemandAndAllDocumentDTOListDataResult
      */
-    document?: string | null;
+    success?: boolean;
     /**
      * 
      * @type {string}
      * @memberof DemandAndAllDocumentDTOListDataResult
      */
-    extension?: string | null;
+    message?: string | null;
 }
 /**
  * 
@@ -2977,7 +2964,7 @@ export interface DemandAndAllDocumentItemDTO {
      * @type {number}
      * @memberof DemandAndAllDocumentItemDTO
      */
-    documentMaintenanceDetailID?: number;
+    id?: number;
     /**
      * 
      * @type {number}
@@ -3080,7 +3067,7 @@ export interface DemandDocument {
      * @type {boolean}
      * @memberof DemandDocument
      */
-    buildID?: number;
+    isActive?: boolean;
     /**
      * 
      * @type {boolean}
@@ -3160,13 +3147,13 @@ export interface DemandGroupListDataResult {
      * @type {boolean}
      * @memberof DemandGroupListDataResult
      */
-    createUserID?: number;
+    success?: boolean;
     /**
      * 
      * @type {string}
      * @memberof DemandGroupListDataResult
      */
-    createDate?: string;
+    message?: string | null;
 }
 /**
  * 
@@ -3197,7 +3184,7 @@ export interface DemandReportDTO {
      * @type {number}
      * @memberof DemandReportDTO
      */
-    assignUserName?: string | null;
+    userTypeID?: number;
     /**
      * 
      * @type {string}
@@ -3769,7 +3756,7 @@ export interface DocumentAndTypeDTO {
      * @type {string}
      * @memberof DocumentAndTypeDTO
      */
-    startDate?: string;
+    explain?: string | null;
     /**
      * 
      * @type {Array<DocumentMaintenanceTypeDTO>}
@@ -3794,7 +3781,7 @@ export interface DocumentAndTypeDTOListDataResult {
      * @type {boolean}
      * @memberof DocumentAndTypeDTOListDataResult
      */
-    documentMaintenanceCreateDate?: string;
+    success?: boolean;
     /**
      * 
      * @type {string}
@@ -3813,7 +3800,7 @@ export interface DocumentDTO {
      * @type {number}
      * @memberof DocumentDTO
      */
-    secondControlUserID?: number | null;
+    id?: number;
     /**
      * 
      * @type {number}
@@ -3832,66 +3819,18 @@ export interface DocumentDTO {
      * @memberof DocumentDTO
      */
     assignUserName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentDTO
-     */
-    documentMaintenanceTypeID?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentDTO
-     */
-    documentID?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentDTO
-     */
-    assignUserID?: number | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentDTO
-     */
-    assignUserName?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentDTO
-     */
-    documentName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentDTO
-     */
-    projectID?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentDTO
-     */
-    documentPeriodID?: number;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentDTO
-     */
-    documentPeriodName?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof DocumentDTO
-     */
-    userTypeID?: number;
     /**
      * 
      * @type {string}
      * @memberof DocumentDTO
      */
     userTypeName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    projectID?: number;
     /**
      * 
      * @type {number}
@@ -3928,6 +3867,54 @@ export interface DocumentDTO {
      * @memberof DocumentDTO
      */
     floorName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    roomID?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentDTO
+     */
+    roomName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    groupID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentDTO
+     */
+    groupName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    brandID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentDTO
+     */
+    brandName?: string | null;
+    /**
+     * 
+     * @type {number}
+     * @memberof DocumentDTO
+     */
+    modelID?: number | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof DocumentDTO
+     */
+    modelName?: string | null;
     /**
      * 
      * @type {number}
@@ -4043,19 +4030,7 @@ export interface DocumentMaintenanceDetailDocument {
      * @type {string}
      * @memberof DocumentMaintenanceDetailDocument
      */
-    explain?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof DocumentTimelineDTO
-     */
-    updateExplain?: string | null;
-    /**
-     * 
-     * @type {Array<DocumentMaintenanceDetailDocument>}
-     * @memberof DocumentTimelineDTO
-     */
-    documents?: Array<DocumentMaintenanceDetailDocument> | null;
+    createDate?: string;
 }
 /**
  * 
@@ -4147,13 +4122,13 @@ export interface DocumentMaintenanceTypeDTO {
      * @type {number}
      * @memberof DocumentMaintenanceTypeDTO
      */
-    id?: number;
+    beforeDay?: number;
     /**
      * 
      * @type {string}
      * @memberof DocumentMaintenanceTypeDTO
      */
-    name?: string | null;
+    startDate?: string;
     /**
      * 
      * @type {string}
@@ -4246,13 +4221,7 @@ export interface DocumentPeriodListDataResult {
      * @type {boolean}
      * @memberof DocumentPeriodListDataResult
      */
-    groupName?: string | null;
-    /**
-     * 
-     * @type {number}
-     * @memberof InventoryDTO
-     */
-    brandID?: number | null;
+    success?: boolean;
     /**
      * 
      * @type {string}
@@ -4451,7 +4420,7 @@ export interface DocumentReportDTO {
      * @type {string}
      * @memberof DocumentReportDTO
      */
-    explain?: string | null;
+    question?: string | null;
     /**
      * 
      * @type {number}
@@ -4590,7 +4559,7 @@ export interface DocumentReportDTOListDataResult {
      * @type {boolean}
      * @memberof DocumentReportDTOListDataResult
      */
-    riskAnalysisIsRequired?: boolean;
+    success?: boolean;
     /**
      * 
      * @type {string}
@@ -4887,7 +4856,7 @@ export interface Floor {
      * @type {number}
      * @memberof Floor
      */
-    initialValue?: string | null;
+    id?: number;
     /**
      * 
      * @type {number}
@@ -4936,25 +4905,19 @@ export interface Group {
      * @type {string}
      * @memberof Group
      */
-    initialValue?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof MaintenanceQuestionDTO
-     */
-    endValue?: string | null;
+    name?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof Group
      */
-    trueFalseAnswer?: boolean;
+    isActive?: boolean;
     /**
      * 
      * @type {string}
      * @memberof Group
      */
-    isActive?: boolean;
+    createDate?: string;
 }
 /**
  * 
@@ -4973,20 +4936,13 @@ export interface InventoryCapacity {
      * @type {string}
      * @memberof InventoryCapacity
      */
-    questionTypeName?: string | null;
-}
-/**
- * 
- * @export
- * @interface MaintenanceQuestionTypeListDataResult
- */
-export interface MaintenanceQuestionTypeListDataResult {
+    name?: string | null;
     /**
      * 
      * @type {boolean}
      * @memberof InventoryCapacity
      */
-    data?: Array<MaintenanceQuestionType> | null;
+    isActive?: boolean;
     /**
      * 
      * @type {string}
@@ -5054,12 +5010,6 @@ export interface InventoryDTO {
      * @memberof InventoryDTO
      */
     floorID?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof Project
-     */
-    companyID?: number;
     /**
      * 
      * @type {string}
@@ -9415,7 +9365,7 @@ export const CounterApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
 
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -9428,12 +9378,9 @@ export const CounterApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(control, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -9461,18 +9408,6 @@ export const CounterApiAxiosParamCreator = function (configuration?: Configurati
 
             // authentication Bearer required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (questionId !== undefined) {
-                localVarQueryParameter['questionId'] = questionId;
-            }
-
-            if (question !== undefined) {
-                localVarQueryParameter['question'] = question;
-            }
-
-            if (isActive !== undefined) {
-                localVarQueryParameter['isActive'] = isActive;
-            }
 
 
     
@@ -9507,9 +9442,6 @@ export const CounterApiAxiosParamCreator = function (configuration?: Configurati
             // authentication Bearer required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
 
-            if (questionGroupId !== undefined) {
-                localVarQueryParameter['questionGroupId'] = questionGroupId;
-            }
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter, options.query);
@@ -9678,267 +9610,8 @@ export const CounterApiFp = function(configuration?: Configuration) {
             const localVarAxiosArgs = await localVarAxiosParamCreator.apiCounterNotCompletedCounterTaskDTOGet(options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
-    };
+    }
 };
-
-/**
- * ControlTaskApi - object-oriented interface
- * @export
- * @class ControlTaskApi
- * @extends {BaseAPI}
- */
-export class ControlTaskApi extends BaseAPI {
-    /**
-     * 
-     * @summary denetim için; denetim ekler
-     * @param {Control} [control] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskAddControlPost(control?: Control, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskAddControlPost(control, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol soru grup u ekler
-     * @param {ControlQuestionGroup} [controlQuestionGroup] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskAddControlQuestionGroupPost(controlQuestionGroup?: ControlQuestionGroup, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskAddControlQuestionGroupPost(controlQuestionGroup, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol sorusu ekler
-     * @param {ControlQuestion} [controlQuestion] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskAddControlQuestionPost(controlQuestion?: ControlQuestion, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskAddControlQuestionPost(controlQuestion, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrole görev tanımlar , periodid 9 ise StartDate ve Beforedate yollamana gerek yok
-     * @param {ControlTask} [controlTask] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskAddControlTaskPost(controlTask?: ControlTask, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskAddControlTaskPost(controlTask, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol sorularını listeler, grubuna göre
-     * @param {number} [controlQuestionGroupId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskControlQuestionListGet(controlQuestionGroupId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskControlQuestionListGet(controlQuestionGroupId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; denetim işlemini gerçekleştirir
-     * @param {ControlTaskMaintenanceAddDTO} [controlTaskMaintenanceAddDTO] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskDoControlMaintenancePost(controlTaskMaintenanceAddDTO?: ControlTaskMaintenanceAddDTO, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskDoControlMaintenancePost(controlTaskMaintenanceAddDTO, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; görevleri generate eder, web kullanmayacak
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGenerateControlTaskGet(options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGenerateControlTaskGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetimleri ve o denetime ait bakım tiplerini listerler
-     * @param {number} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlAndTypeListDGet(projectId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlAndTypeListDGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için;denetimleri listeler
-     * @param {number} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlListGet(projectId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlListGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol soru gruplarını listeler
-     * @param {number} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlQuestionGroupListGet(projectId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlQuestionGroupListGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol soru tiplerini listeler
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlQuestionTypeListGet(options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlQuestionTypeListGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; raporlar
-     * @param {number} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlReportGet(projectId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlReportGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrole ait görevleri listeler
-     * @param {number} [controlId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlTaskListGet(controlId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlTaskListGet(controlId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol görev periodlarını listeler
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlTaskPeriodListGet(options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlTaskPeriodListGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için;timeline
-     * @param {number} [projectId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlTimelineGet(projectId?: number, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlTimelineGet(projectId, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için;timeline
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskGetControlTimelineStatusDescGet(options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskGetControlTimelineStatusDescGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskNotCompletedControlTaskForEmailGet(options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskNotCompletedControlTaskForEmailGet(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; denetim günceller
-     * @param {Control} [control] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskUpdateControlPost(control?: Control, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlPost(control, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol sorusunu günceller - soru ve durumu
-     * @param {number} [questionId] 
-     * @param {string} [question] 
-     * @param {boolean} [isActive] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskUpdateControlQuestionGet(questionId?: number, question?: string, isActive?: boolean, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlQuestionGet(questionId, question, isActive, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrol soru grup u günceller - adı ve durumu
-     * @param {number} [questionGroupId] 
-     * @param {string} [name] 
-     * @param {boolean} [isActive] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskUpdateControlQuestionGroupGet(questionGroupId?: number, name?: string, isActive?: boolean, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlQuestionGroupGet(questionGroupId, name, isActive, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @summary denetim için; kontrole ait görevi günceller
-     * @param {ControlTask} [controlTask] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ControlTaskApi
-     */
-    public apiControlTaskUpdateControlTaskPost(controlTask?: ControlTask, options?: any) {
-        return ControlTaskApiFp(this.configuration).apiControlTaskUpdateControlTaskPost(controlTask, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
 
 /**
  * CounterApi - factory interface
@@ -9977,16 +9650,6 @@ export const CounterApiFactory = function (configuration?: Configuration, basePa
         apiCounterCounterListByProjectIdGet(projectId?: number, options?: any): AxiosPromise<Result> {
             return localVarFp.apiCounterCounterListByProjectIdGet(projectId, options).then((request) => request(axios, basePath));
         },
-    }
-};
-
-/**
- * CounterApi - functional programming interface
- * @export
- */
-export const CounterApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = CounterApiAxiosParamCreator(configuration)
-    return {
         /**
          * 
          * @summary sayaça bakılarını üretir
@@ -10025,16 +9688,6 @@ export const CounterApiFp = function(configuration?: Configuration) {
         apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel?: DoCounterMaintenanceModel, options?: any): AxiosPromise<Result> {
             return localVarFp.apiCounterDoCounterMaintenancePost(doCounterMaintenanceModel, options).then((request) => request(axios, basePath));
         },
-    }
-};
-
-/**
- * CounterApi - factory interface
- * @export
- */
-export const CounterApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = CounterApiFp(configuration)
-    return {
         /**
          * 
          * @summary sayaç bakılarını listeler
