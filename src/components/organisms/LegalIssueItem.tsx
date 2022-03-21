@@ -25,7 +25,7 @@ const LegalIssueItem: FC<Props> = (props) => {
   const navigation = useNavigation<any>();
 
   return (
-    <Card variant="timelineItem">
+    <Card variant="timelineItemLegal">
       <Box flexDirection="row" alignItems="flex-start">
         <Box
           backgroundColor={props.data.isCompleted ? "green.50" : "gray.50"}

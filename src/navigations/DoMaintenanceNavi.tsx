@@ -15,7 +15,12 @@ import FollowDocIssueStack from "./stacks/FollowDoc/FollowDocStack";
 import ControlTaskIssueStack from "./stacks/ControlTask/ControlTaskIssueStack";
 import CounterIssueStack from "./stacks/Counter/CounterIssueStack";
 
-import {Ionicons, FontAwesome, MaterialIcons , MaterialCommunityIcons} from '@expo/vector-icons'
+import {
+  Ionicons,
+  FontAwesome,
+  MaterialIcons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 
 type Routes = {
   MaintenanceIssueStack: undefined;
@@ -49,19 +54,11 @@ const DoMaintenanceNavi = () => {
   return (
     <DoMaintenanceTabs.Navigator>
       <DoMaintenanceTabs.Screen
-        name="MaintenanceIssueStack"
-        component={MaintenanceIssueStack}
+        name="ControlTaskIssueStack"
+        component={ControlTaskIssueStack}
         options={{
-          tabBarIcon: createIcon("calendar-blank-outline"),
-          tabBarLabel: createLabel("Bakım"),
-        }}
-      />
-      <DoMaintenanceTabs.Screen
-        name="LegalIssueStack"
-        component={LegalIssueStack}
-        options={{
-          tabBarIcon: createIcon("view-comfy"),
-          tabBarLabel: createLabel("Periyodik"),
+          tabBarIcon: createIcon("format-list-checkbox"),
+          tabBarLabel: createLabel("Denetim"),
         }}
       />
       <DoMaintenanceTabs.Screen
@@ -80,12 +77,21 @@ const DoMaintenanceNavi = () => {
           tabBarLabel: createLabel("Belge"),
         }}
       />
+
       <DoMaintenanceTabs.Screen
-        name="ControlTaskIssueStack"
-        component={ControlTaskIssueStack}
+        name="MaintenanceIssueStack"
+        component={MaintenanceIssueStack}
         options={{
-          tabBarIcon: createIcon("format-list-checkbox"),
-          tabBarLabel: createLabel("Denetim"),
+          tabBarIcon: createIcon("calendar-blank-outline"),
+          tabBarLabel: createLabel("Bakım"),
+        }}
+      />
+      <DoMaintenanceTabs.Screen
+        name="LegalIssueStack"
+        component={LegalIssueStack}
+        options={{
+          tabBarIcon: createIcon("view-comfy"),
+          tabBarLabel: createLabel("Periyodik"),
         }}
       />
       <DoMaintenanceTabs.Screen

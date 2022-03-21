@@ -11,13 +11,11 @@ import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 const HomeScreen: FC<AuthNaviProps<"Home">> = (props) => {
   const insets = useSafeAreaInsets();
   return (
-    <Box style={{ paddingBottom: insets.bottom}}>
+    <Box style={{ paddingBottom: insets.bottom }}>
       <Box height={hp(60)}>
         <Image
           style={{ width: "100%", height: "100%" }}
-          source={{
-            uri: "https://i.pinimg.com/originals/92/d3/e2/92d3e202bee3df35b5a65278158677c1.jpg",
-          }}
+          source={require("../../assets/images/siemensback.jpg")}
         />
       </Box>
       <Box height={hp(40)} alignItems="stretch">

@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.vkeam.tys",
+      "bundleIdentifier": "com.vkeam.sre",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This application allows you to take, save and share photos. You allow for do maintenance.",
@@ -37,7 +37,7 @@
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.vkeam.tys"
+      "package": "com.vkeam.sre"
     }
   }
 }

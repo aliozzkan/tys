@@ -18,7 +18,7 @@ const ControlTaskIssues = (props: any) => {
           listRef.current.goToday();
         }}
         onPressColorDesc={() => {
-          props.navigation.navigate("ColorDesc")
+          props.navigation.navigate("ColorDesc");
         }}
         onChangeSearchQuery={text => setSearch(text)}
         onPressFilter={() => {

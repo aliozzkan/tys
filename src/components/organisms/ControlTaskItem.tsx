@@ -23,7 +23,7 @@ const ControlTaskItem = (props: Props) => {
   const maintenanceDate = Moment(props.data.endDate);
 
   return (
-    <Card variant="timelineItem">
+    <Card variant="timelineItemControl">
       <Box flexDirection="row" alignItems="flex-start">
         <Box
           backgroundColor={props.data.isCompleted ? "green.50" : "gray.50"}
@@ -53,9 +53,6 @@ const ControlTaskItem = (props: Props) => {
           </Box>
           <Box height={1} backgroundColor="gray.400" width="100%" mt="s" />
           <KeyValue title="Tesis" value={props.data.campusName} />
-          <KeyValue title="Bina" value={props.data.buildName} />
-          <KeyValue title="Kat" value={props.data.floorName} />
-          <KeyValue title="Oda" value={props.data.roomName} />
           <KeyValue title="Periyot" value={props.data.controlPeriodName} />
           <KeyValue title="Kullanıcı" value={props.data.userName} />
           <KeyValue

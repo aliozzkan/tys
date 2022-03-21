@@ -24,7 +24,7 @@ const FollowDocItem = (props: Props) => {
   const navigation = useNavigation<any>();
 
   return (
-    <Card variant="timelineItem">
+    <Card variant="timelineItemDocument">
       <Box flexDirection="row" alignItems="flex-start">
         <Box
           backgroundColor={props.data.isCompleted ? "green.50" : "gray.50"}
@@ -55,9 +55,6 @@ const FollowDocItem = (props: Props) => {
 
           <Box height={1} backgroundColor="gray.400" width="100%" mt="s" />
           <KeyValue title="Tesis" value={props.data.campusName} />
-          <KeyValue title="Bina" value={props.data.buildName} />
-          <KeyValue title="Oda" value={props.data.floorName} />
-          <KeyValue title="Kat" value={props.data.roomName} />
           <KeyValue title="Periyot" value={props.data.documentPeriodName} />
           <KeyValue
             title="Planlı Bakım Tarihi"
