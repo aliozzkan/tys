@@ -23,7 +23,7 @@ const ControlTaskItem = (props: Props) => {
   const maintenanceDate = Moment(props.data.endDate);
 
   return (
-    <Card variant="timelineItemControl">
+    <Card variant="timelineItemLegal">
       <Box flexDirection="row" alignItems="flex-start">
         <Box
           backgroundColor={props.data.isCompleted ? "green.50" : "gray.50"}
@@ -39,7 +39,11 @@ const ControlTaskItem = (props: Props) => {
         </Box>
         <Box p="m" flex={1} width="100%">
           <Box flexDirection="row" justifyContent="space-between">
-            <Text fontFamily={FontFamily.MonserratSemibold} fontSize={18} lineHeight={18}>
+            <Text
+              fontFamily={FontFamily.MonserratSemibold}
+              fontSize={18}
+              lineHeight={18}
+            >
               {props.data.controlName}
             </Text>
             <Box
@@ -70,7 +74,9 @@ const ControlTaskItem = (props: Props) => {
             alignItems="flex-start"
             justifyContent="space-between"
           >
-            <Text color="gray.600" fontSize={14} lineHeight={14}>{props.data.statusDesc}</Text>
+            <Text color="gray.600" fontSize={14} lineHeight={14}>
+              {props.data.statusDesc}
+            </Text>
           </Box>
         </Box>
       </Box>

@@ -2,7 +2,7 @@
   "expo": {
     "name": "TYS",
     "slug": "TYS",
-    "version": "1.4.0",
+    "version": "2.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "icon": "./assets/icon.png",
@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.vkeam.sre",
+      "bundleIdentifier": "com.vkeam.tys",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This application allows you to take, save and share photos. You allow for do maintenance.",
@@ -32,7 +32,7 @@
         "READ_EXTERNAL_STORAGE",
         "WRITE_EXTERNAL_STORAGE"
       ],
-      "versionCode": 9,
+      "versionCode": 20,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
