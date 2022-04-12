@@ -4,4 +4,4 @@ export enum api {
   apl,
 }
 
-export const __mode__: api = api.siemens;
+export const __mode__: api = api.test;
