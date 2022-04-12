@@ -9,7 +9,9 @@ import {
   MaintenanceIssueDetailScreen as DetailScreen,
   MaintenanceIssueDo as DoScreen,
   FilterScreen as Filter,
-  MaintenanceColorDesc as ColorDesc
+  MaintenanceColorDesc as ColorDesc,
+  MaintenanceScanBarcode,
+  MaintenanceDetail,
 } from "../../../screens";
 
 import DoMaintenanceStack from "./DoMaintenanceIssueStack";
@@ -20,7 +22,7 @@ import { useNavigation } from "@react-navigation/native";
 
 type Routes = {
   MaintenanceIssueList: {
-    filterData?: any[]
+    filterData?: any[];
   };
   MaintenanceIssueDetail: {
     maintenanceIssueId: number;
@@ -32,6 +34,10 @@ type Routes = {
     keys?: any[];
   };
   ColorDesc: undefined;
+  MaintenanceScanBarcode: undefined;
+  MaintenanceDetail: {
+    barcode: string;
+  };
   // MaintenanceIssueDo: {
   //   maintenanceIssueId: number;
   //   screenTitle: string;
@@ -78,6 +84,16 @@ const MaintenanceIssueStack = () => (
       name="ColorDesc"
       component={ColorDesc}
       options={{ title: "Renk Açıklamaları" }}
+    />
+    <Stack.Screen
+      name="MaintenanceScanBarcode"
+      component={MaintenanceScanBarcode}
+      options={{ title: "Ekipman Barkod" }}
+    />
+    <Stack.Screen
+      name="MaintenanceDetail"
+      component={MaintenanceDetail}
+      options={{ title: "Ekipman Detay" }}
     />
     {/* <Stack.Screen
       name="MaintenanceIssueDo"

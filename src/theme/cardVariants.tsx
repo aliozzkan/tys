@@ -49,4 +49,11 @@ export const cardVariants = {
     justifyContent: "space-between",
     overflow: "hidden",
   },
+  timelineItemControl: {
+    backgroundColor: "white",
+    height: RFValue(235),
+    borderRadius: "l",
+    justifyContent: "space-between",
+    overflow: "hidden",
+  },
 };

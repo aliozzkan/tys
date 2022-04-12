@@ -244,4 +244,8 @@ export const Hooks = {
     useFetchManager<typeof API.CounterAPI.apiCounterDoCounterMaintenancePost>(
       API.CounterAPI.apiCounterDoCounterMaintenancePost
     ),
+  InventoryDetailByBarcode: () =>
+    useFetchManager<
+      typeof API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet
+    >(API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet),
 };

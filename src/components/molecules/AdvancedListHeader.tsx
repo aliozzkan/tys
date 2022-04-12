@@ -17,6 +17,7 @@ interface Props {
   onPressGoCritic: callback;
   onPressSearch?: callback;
   onPressColorDesc?: callback;
+  onPressBarcode?: callback;
   onChangeSearchQuery?: (text: string) => void;
   noCampus?: boolean;
 }
@@ -108,10 +109,19 @@ const AdvancedListHeader: FC<Props> = (props) => {
       >
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           <Box flexDirection="row" alignItems="center">
+            {props.onPressBarcode && (
+              <Button
+                leftIcon="crop"
+                marginHorizontal="xs"
+                marginLeft="m"
+                colorScheme="purple"
+                label="Barkod"
+                onPress={props.onPressBarcode || undefined}
+              />
+            )}
             <Button
               leftIcon="arrow-down"
               marginHorizontal="xs"
-              marginLeft="m"
               colorScheme="blue"
               label="Geçmiş"
               onPress={props.onPressGoCritic || undefined}
@@ -123,13 +133,15 @@ const AdvancedListHeader: FC<Props> = (props) => {
               label="Bugün"
               onPress={props.onPressGoToday || undefined}
             />
-            {!props.noCampus && <Button
-              leftIcon="home"
-              marginHorizontal="xs"
-              colorScheme="green"
-              label="Tesis"
-              onPress={() => setCampusOpen((prev) => !prev)}
-            />}
+            {!props.noCampus && (
+              <Button
+                leftIcon="home"
+                marginHorizontal="xs"
+                colorScheme="green"
+                label="Tesis"
+                onPress={() => setCampusOpen((prev) => !prev)}
+              />
+            )}
             <Button
               leftIcon="filter"
               marginHorizontal="xs"
@@ -183,11 +195,7 @@ const AdvancedListHeader: FC<Props> = (props) => {
               padding="s"
               borderRadius="s"
             >
-              <Text>
-                {
-                  selectedCampusId.name
-                }
-              </Text>
+              <Text>{selectedCampusId.name}</Text>
               <Ionicons name="chevron-down" />
             </Box>
           </TouchableOpacity>

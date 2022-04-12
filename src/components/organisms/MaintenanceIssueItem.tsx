@@ -140,7 +140,7 @@ const MaintenanceIssueItem: FC<MaintenanceIssueItemProps> = (props) => {
             props.data.maintenanceTransactionStatus
           ) ? (
           <TouchableOpacity
-            style={{ flex: 1, height: 50 }}
+            style={{ flex: 1, height: 40 }}
             onPress={() => goSide("do")}
           >
             <Box

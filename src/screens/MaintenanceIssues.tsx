@@ -30,6 +30,9 @@ const MaintenanceIssues: FC<
           props.navigation.navigate("ColorDesc");
         }}
         onChangeSearchQuery={(text) => setSearch(text)}
+        onPressBarcode={() => {
+          props.navigation.navigate("MaintenanceScanBarcode");
+        }}
         onPressFilter={() => {
           props.navigation.navigate("Filter", {
             backRoute: "MaintenanceIssueList",

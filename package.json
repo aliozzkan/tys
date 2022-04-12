@@ -11,9 +11,9 @@
     "lint": "eslint --ext .ts,.tsx .",
     "tsc": "tsc",
     "ci": "yarn lint && yarn tsc",
-    "build:prod:a": "expo build:android --release-channel prod",
-    "build:prod:i": "expo build:ios --release-channel prod",
-    "publish:prod": "expo publish --release-channel prod"
+    "build:prod:a": "expo build:android --release-channel prod2",
+    "build:prod:i": "expo build:ios --release-channel prod2",
+    "publish:prod": "expo publish --release-channel prod2"
   },
   "dependencies": {
     "@dudigital/react-native-zoomable-view": "^1.1.3",
