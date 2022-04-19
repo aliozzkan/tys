@@ -90,6 +90,7 @@ const API = {
   InventoryLegalInspectionAPI: InventoryLegalInspectionApiFactory(...founds),
   ControlTaskAPI: ControlTaskApiFactory(...founds),
   CounterAPI: CounterApiFactory(...founds),
+  MaintenanceReport: MaintenanceReportApiFactory(...founds),
 };
 
 export const Hooks = {
@@ -248,4 +249,8 @@ export const Hooks = {
     useFetchManager<
       typeof API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet
     >(API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet),
+  GetCompletedMaintenance: () =>
+    useFetchManager<
+      typeof API.MaintenanceReport.apiMaintenanceReportGetCompletedMaintenanceGet
+    >(API.MaintenanceReport.apiMaintenanceReportGetCompletedMaintenanceGet),
 };

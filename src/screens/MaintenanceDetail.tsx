@@ -30,6 +30,7 @@ const MaintenanceDetail: FC<MaintenanceIssueStackProps<"MaintenanceDetail">> = (
       app: { selectedCampus },
     },
   ] = useRedux();
+
   return (
     <Box flex={1}>
       {!detailManager.isFullfilled && <ActivityIndicator />}
