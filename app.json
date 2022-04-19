@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SRE",
-    "slug": "SRE",
+    "name": "TYS",
+    "slug": "TYS",
     "version": "2.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
@@ -17,7 +17,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.vkeam.sre",
+      "bundleIdentifier": "com.vkeam.tys",
       "buildNumber": "1.0.0",
       "infoPlist": {
         "NSCameraUsageDescription": "This application allows you to take, save and share photos. You allow for do maintenance.",
@@ -34,10 +34,10 @@
       ],
       "versionCode": 21,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.vkeam.sre"
+      "package": "com.vkeam.tys"
     }
   }
 }
