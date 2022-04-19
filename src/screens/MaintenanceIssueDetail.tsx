@@ -169,11 +169,11 @@ const MaintenanceIssueDetail: FC<
               />
               <KeyValue
                 title="Birim"
-                value={detailManager.data?.data.data.unit as string}
+                value={detailManager.data?.data.data.capacityName as string}
               />
               <KeyValue
                 title="Kapasite"
-                value={detailManager.data?.data.data.capacityName as string}
+                value={detailManager.data?.data.data.unit as string}
               />
               <Text variant="bodyHeader" mt="m">
                 Lokasyon Bilgileri
@@ -288,48 +288,80 @@ const MaintenanceIssueDetail: FC<
                   <KeyValue {...x} key={index} />
                 ))}
               </Box>
-              <Box p="m" m="m" mt="s" backgroundColor="white" borderRadius="l">
-                <Text variant="bodyHeader">Form Olayları</Text>
-                {[
-                  {
-                    title: "ISG Risk Analizi",
-                    value: "Okudum, Anladım",
-                    stat: maintenance.riskAnalysisIsRequired,
-                  },
-                  {
-                    title: "Kullanma Klavuzu",
-                    value: "Okudum, Anladım",
-                    stat: maintenance.userGudiePathIsRequired,
-                  },
-                  {
-                    title: "Kullanıcı Talimatları",
-                    value: "Okudum, Anladım",
-                    stat: maintenance.userInstructionsIsRequired,
-                  },
-                  {
-                    title: "Bakım Sözleşmesi",
-                    value: "Okudum, Anladım",
-                    stat: maintenance.maintenanceContractIsRequired,
-                  },
-                ]
-                  .filter((item) => item.stat)
-                  .map((x, index) => (
-                    <KeyValue {...x} key={index} />
-                  ))}
-              </Box>
-              <Box p="m" m="m" mt="s" backgroundColor="white" borderRadius="l">
-                <Text variant="bodyHeader">Bakım Soruları</Text>
+              {[
+                {
+                  title: "ISG Risk Analizi",
+                  value: "Okudum, Anladım",
+                  stat: maintenance.riskAnalysisIsRequired,
+                },
+                {
+                  title: "Kullanma Klavuzu",
+                  value: "Okudum, Anladım",
+                  stat: maintenance.userGudiePathIsRequired,
+                },
+                {
+                  title: "Kullanıcı Talimatları",
+                  value: "Okudum, Anladım",
+                  stat: maintenance.userInstructionsIsRequired,
+                },
+                {
+                  title: "Bakım Sözleşmesi",
+                  value: "Okudum, Anladım",
+                  stat: maintenance.maintenanceContractIsRequired,
+                },
+              ].filter((item) => item.stat).length > 0 && (
+                <Box
+                  p="m"
+                  m="m"
+                  mt="s"
+                  backgroundColor="white"
+                  borderRadius="l"
+                >
+                  <Text variant="bodyHeader">Form Olayları</Text>
+                  {[
+                    {
+                      title: "ISG Risk Analizi",
+                      value: "Okudum, Anladım",
+                      stat: maintenance.riskAnalysisIsRequired,
+                    },
+                    {
+                      title: "Kullanma Klavuzu",
+                      value: "Okudum, Anladım",
+                      stat: maintenance.userGudiePathIsRequired,
+                    },
+                    {
+                      title: "Kullanıcı Talimatları",
+                      value: "Okudum, Anladım",
+                      stat: maintenance.userInstructionsIsRequired,
+                    },
+                    {
+                      title: "Bakım Sözleşmesi",
+                      value: "Okudum, Anladım",
+                      stat: maintenance.maintenanceContractIsRequired,
+                    },
+                  ]
+                    .filter((item) => item.stat)
+                    .map((x, index) => (
+                      <KeyValue {...x} key={index} />
+                    ))}
+                </Box>
+              )}
 
-                {getQuestions(
-                  maintenance.maintenanceQuestion as unknown as string
-                ).length === 0 ? (
-                  <Text>Mevcut Değil</Text>
-                ) : (
-                  getQuestions(
+              {getQuestions(
+                maintenance.maintenanceQuestion as unknown as string
+              ).length > 0 && (
+                <Box
+                  p="m"
+                  m="m"
+                  mt="s"
+                  backgroundColor="white"
+                  borderRadius="l"
+                >
+                  <Text variant="bodyHeader">Bakım Soruları</Text>
+                  {getQuestions(
                     maintenance.maintenanceQuestion as unknown as string
                   )
                     .map((question: any) => {
-                      console.log({ question });
                       return {
                         title: question.Question,
                         value:
@@ -360,68 +392,77 @@ const MaintenanceIssueDetail: FC<
                     })
                     .map((x: any, index: number) => (
                       <KeyValue {...x} key={index} />
-                    ))
-                )}
-              </Box>
-              <TouchableOpacity onPress={() => setImage1(true)}>
-                <Box
-                  p="m"
-                  m="m"
-                  mt="s"
-                  backgroundColor="white"
-                  borderRadius="l"
-                >
-                  <Text variant="bodyHeader">İş İzin / Bakım Formu</Text>
-
-                  <Box flexDirection="row" flexWrap="wrap">
-                    {maintenance.photos
-                      .filter((photo: any) => photo.type === "formPhoto")
-                      .map((x) => (
-                        <Box marginTop="s" mr="s">
-                          <Image
-                            source={{ uri: x.photoPath }}
-                            key={x.id}
-                            style={{
-                              width: 100,
-                              height: 100,
-                              resizeMode: "contain",
-                            }}
-                          />
-                        </Box>
-                      ))}
-                  </Box>
+                    ))}
                 </Box>
-              </TouchableOpacity>
+              )}
 
-              <TouchableOpacity onPress={() => setImage2(true)}>
-                <Box
-                  p="m"
-                  m="m"
-                  mt="s"
-                  backgroundColor="white"
-                  borderRadius="l"
-                >
-                  <Text variant="bodyHeader">Ekipman Fotoğrafları</Text>
+              {maintenance.photos.filter(
+                (photo: any) => photo.type === "formPhoto"
+              ).length > 0 && (
+                <TouchableOpacity onPress={() => setImage1(true)}>
+                  <Box
+                    p="m"
+                    m="m"
+                    mt="s"
+                    backgroundColor="white"
+                    borderRadius="l"
+                  >
+                    <Text variant="bodyHeader">İş İzin / Bakım Formu</Text>
 
-                  <Box flexDirection="row" flexWrap="wrap">
-                    {maintenance.photos
-                      .filter((photo: any) => photo.type === "inventoryPhoto")
-                      .map((x) => (
-                        <Box marginTop="s" mr="s">
-                          <Image
-                            source={{ uri: x.photoPath }}
-                            key={x.id}
-                            style={{
-                              width: 100,
-                              height: 100,
-                              resizeMode: "contain",
-                            }}
-                          />
-                        </Box>
-                      ))}
+                    <Box flexDirection="row" flexWrap="wrap">
+                      {maintenance.photos
+                        .filter((photo: any) => photo.type === "formPhoto")
+                        .map((x) => (
+                          <Box marginTop="s" mr="s">
+                            <Image
+                              source={{ uri: x.photoPath }}
+                              key={x.id}
+                              style={{
+                                width: 100,
+                                height: 100,
+                                resizeMode: "contain",
+                              }}
+                            />
+                          </Box>
+                        ))}
+                    </Box>
                   </Box>
-                </Box>
-              </TouchableOpacity>
+                </TouchableOpacity>
+              )}
+
+              {maintenance.photos.filter(
+                (photo: any) => photo.type === "inventoryPhoto"
+              ).length > 0 && (
+                <TouchableOpacity onPress={() => setImage2(true)}>
+                  <Box
+                    p="m"
+                    m="m"
+                    mt="s"
+                    backgroundColor="white"
+                    borderRadius="l"
+                  >
+                    <Text variant="bodyHeader">Ekipman Fotoğrafları</Text>
+
+                    <Box flexDirection="row" flexWrap="wrap">
+                      {maintenance.photos
+                        .filter((photo: any) => photo.type === "inventoryPhoto")
+                        .map((x) => (
+                          <Box marginTop="s" mr="s">
+                            <Image
+                              source={{ uri: x.photoPath }}
+                              key={x.id}
+                              style={{
+                                width: 100,
+                                height: 100,
+                                resizeMode: "contain",
+                              }}
+                            />
+                          </Box>
+                        ))}
+                    </Box>
+                  </Box>
+                </TouchableOpacity>
+              )}
 
               <Modal
                 visible={imageSet1}

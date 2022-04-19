@@ -20,7 +20,7 @@ const KeyValue = (props: KeyValueProps) => {
         color={props.highlight ? "blue.400" : undefined}
         fontFamily={FontFamily.RalewayRegular}
       >
-        {props.value}
+        {["null", null].includes(props.value) ? "-" : props.value}
       </Text>
     </Box>
   );

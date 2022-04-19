@@ -12,7 +12,8 @@
     "tsc": "tsc",
     "ci": "yarn lint && yarn tsc",
     "build:prod:a": "expo build:android --release-channel prod2",
-    "build:prod:i": "expo build:ios --release-channel prod2 --clear-provisioning-profile",
+    "build:prod:i": "expo build:ios --release-channel prod2",
+    "build:prod:i:clear": "expo build:ios --release-channel prod2 --clear-provisioning-profile",
     "publish:prod": "expo publish --release-channel prod2"
   },
   "dependencies": {
