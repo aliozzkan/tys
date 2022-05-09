@@ -11,7 +11,11 @@ interface KeyValueProps {
 const KeyValue = (props: KeyValueProps) => {
   return (
     <Box mt="s" flexDirection="row" alignItems="center">
-      <Text fontSize={12} lineHeight={12} fontFamily={FontFamily.MonserratSemibold}>
+      <Text
+        fontSize={12}
+        lineHeight={12}
+        fontFamily={FontFamily.MonserratSemibold}
+      >
         {props.title}:{" "}
       </Text>
       <Text
@@ -20,7 +24,7 @@ const KeyValue = (props: KeyValueProps) => {
         color={props.highlight ? "blue.400" : undefined}
         fontFamily={FontFamily.RalewayRegular}
       >
-        {props.value}
+        {["null", null].includes(props.value) ? "-" : props.value}
       </Text>
     </Box>
   );

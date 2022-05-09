@@ -78,11 +78,11 @@ const MaintenanceDetail: FC<MaintenanceIssueStackProps<"MaintenanceDetail">> = (
                 />
                 <KeyValue
                   title="Birim"
-                  value={detailManager.data?.data.data.unit as string}
+                  value={detailManager.data?.data.data.capacityName as string}
                 />
                 <KeyValue
                   title="Kapasite"
-                  value={detailManager.data?.data.data.capacityName as string}
+                  value={detailManager.data?.data.data.unit as string}
                 />
                 <Text variant="bodyHeader" mt="m">
                   Lokasyon Bilgileri
