@@ -18,7 +18,7 @@ export default function App() {
 
   useEffect(() => {
     Moment.locale("tr");
-    versionManager.fetch(10);
+    versionManager.fetch(11);
   }, []);
 
   useEffect(() => {

@@ -18,6 +18,7 @@ import { Hooks } from "../services";
 import Moment from "moment";
 import { useAuth } from "../hooks/redux-hooks";
 import ImageViewer from "react-native-image-zoom-viewer";
+import Fontawesome from "@expo/vector-icons/FontAwesome";
 
 interface CompletedMaintenance {
   userTypeId: number;
@@ -96,7 +97,9 @@ const MaintenanceIssueDetail: FC<
 
   useLayoutEffect(() => {
     detailManager.fetch(props.route.params.maintenanceIssueId);
-    completedsManager.fetch(project.id);
+    if (!completedsManager.hasData) {
+      completedsManager.fetch(project.id);
+    }
     props.navigation.setOptions({ title: props.route.params.screenTitle });
   }, []);
 
@@ -145,6 +148,31 @@ const MaintenanceIssueDetail: FC<
           >
             <Box p="m">
               <Text variant="bodyHeader">Genel Bilgiler</Text>
+              {detailManager.data?.data.data.inventoryPhotoPath ? (
+                <Box my="s">
+                  <Image
+                    source={{
+                      uri: detailManager.data?.data.data.inventoryPhotoPath,
+                    }}
+                    style={{ height: 150, width: "100%" }}
+                    resizeMode="contain"
+                  />
+                </Box>
+              ) : (
+                <Box
+                  p="xl"
+                  my="m"
+                  backgroundColor="gray.100"
+                  borderRadius="s"
+                  alignItems="center"
+                >
+                  <Fontawesome name="photo" size={30} />
+                  <Text textAlign="center" mt="m">
+                    Ekipman Fotoğrafı Tanımlanmamış
+                  </Text>
+                </Box>
+              )}
+
               <KeyValue
                 title="#ID"
                 value={
@@ -395,7 +423,6 @@ const MaintenanceIssueDetail: FC<
                     ))}
                 </Box>
               )}
-
               {maintenance.photos.filter(
                 (photo: any) => photo.type === "formPhoto"
               ).length > 0 && (
@@ -408,7 +435,6 @@ const MaintenanceIssueDetail: FC<
                     borderRadius="l"
                   >
                     <Text variant="bodyHeader">İş İzin / Bakım Formu</Text>
-
                     <Box flexDirection="row" flexWrap="wrap">
                       {maintenance.photos
                         .filter((photo: any) => photo.type === "formPhoto")

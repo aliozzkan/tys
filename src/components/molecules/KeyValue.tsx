@@ -11,7 +11,11 @@ interface KeyValueProps {
 const KeyValue = (props: KeyValueProps) => {
   return (
     <Box mt="s" flexDirection="row" alignItems="center">
-      <Text fontSize={12} lineHeight={12} fontFamily={FontFamily.MonserratSemibold}>
+      <Text
+        fontSize={12}
+        lineHeight={12}
+        fontFamily={FontFamily.MonserratSemibold}
+      >
         {props.title}:{" "}
       </Text>
       <Text

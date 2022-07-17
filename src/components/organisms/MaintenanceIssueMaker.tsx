@@ -23,6 +23,7 @@ import TextInput from "../molecules/TextInput";
 import Button from "../molecules/Button";
 import { useAuth } from "../../hooks/redux-hooks";
 import { Hooks } from "../../services";
+import { Question } from "../../models/question";
 
 interface Props {
   maintenance: IMaintenanceIssueDetail;
@@ -41,8 +42,31 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
     explain: "",
     questions: [],
   });
+  const [validateState, setValidateState] = useState({
+    validations: [],
+    questionValidates: [] as any[],
+  });
 
   async function handleClickComplete() {
+    if (datas.questions) {
+      const questionValidates: any[] = [];
+      datas.questions.forEach((question: Question) => {
+        if (!question.SelectedItem || question.SelectedItem === "") {
+          questionValidates.push(question.Id);
+        }
+      });
+      if (questionValidates.length > 0) {
+        setValidateState((prev) => ({ ...prev, questionValidates }));
+        Alert.alert("Lütfen bütün alanları doldurun!");
+        return;
+      }
+    }
+
+    if (!datas.firm) {
+      Alert.alert("Lütfen bakım firması alanını doldurunuz!");
+      return;
+    }
+
     await doManager.fetch({
       createUserID: user.id,
       projectID: project.id,
@@ -167,7 +191,7 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
                     navigation.navigate("DocumentViewer", {
                       file: { type: "", path: mai.maintenanceContractPath },
                       field: "contract",
-                      backUrl: "DoMaintenanceIssue"
+                      backUrl: "DoMaintenanceIssue",
                     });
                   }}
                 />
@@ -184,7 +208,7 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
                     navigation.navigate("DocumentViewer", {
                       file: { type: "", path: mai.riskAnalysisPath },
                       field: "riskAnalysis",
-                      backUrl: "DoMaintenanceIssue"
+                      backUrl: "DoMaintenanceIssue",
                     });
                   }}
                 />
@@ -201,7 +225,7 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
                     navigation.navigate("DocumentViewer", {
                       file: { type: "", path: mai.userInstructionsPath },
                       field: "instruction",
-                      backUrl: "DoMaintenanceIssue"
+                      backUrl: "DoMaintenanceIssue",
                     });
                   }}
                 />
@@ -218,7 +242,7 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
                     navigation.navigate("DocumentViewer", {
                       file: { type: "", path: mai.userGudiePath },
                       field: "guide",
-                      backUrl: "DoMaintenanceIssue"
+                      backUrl: "DoMaintenanceIssue",
                     });
                   }}
                 />
@@ -255,10 +279,17 @@ const MaintenanceIssueMaker: FC<Props> = ({ maintenance: mai, requires }) => {
             <Text variant="bodyHeader">Sorular</Text>
             <Divider />
             <MaintenanceIssueQuestions
+              invalidIds={validateState.questionValidates}
               maintenanceId={mai.inventoryMaintenanceTypeID}
-              onChange={(questions) =>
-                setDatas((state: any) => ({ ...state, questions }))
-              }
+              onChange={(questions) => {
+                setValidateState((prev) => ({
+                  ...prev,
+                  questionValidates: prev.questionValidates.filter(
+                    (v) => !questions.find((q) => q.Id === v)
+                  ),
+                }));
+                setDatas((state: any) => ({ ...state, questions }));
+              }}
             />
           </Card>
         )}

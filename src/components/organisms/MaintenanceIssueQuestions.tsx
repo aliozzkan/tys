@@ -11,16 +11,16 @@ import TextInput from "../molecules/TextInput";
 
 interface Props {
   maintenanceId: number;
-  onChange?: (questions: IQuestion[]) => void
+  onChange?: (questions: IQuestion[]) => void;
+  invalidIds?: any[];
 }
 
 const MaintenanceIssueQuestions: FC<Props> = (props) => {
   const questionsManager = Hooks.ListMaintenanceQuestion();
   const [questions, setQuestions] = useState<IQuestion[] | null>(null);
 
-
   useEffect(() => {
-    if(props.onChange && !!questions) {
+    if (props.onChange && !!questions) {
       props.onChange(questions);
     }
   }, [questions]);
@@ -28,22 +28,23 @@ const MaintenanceIssueQuestions: FC<Props> = (props) => {
   useEffect(() => {
     if (questionsManager.data) {
       let data: any[] = [];
-      questionsManager.data?.data.data.forEach((quest: any, index: number) => {
-        data.push({
-          Id: quest.id,
-          Question: quest.question,
-          SelectedItem: null,
-          isDone: true,
-          QuestionType: quest.maintenanceQuestionTypeID,
-          InitialValue: quest.initialValue,
-          EndValue: quest.endValue,
-          trueFalseAnswer: quest.trueFalseAnswer,
+      questionsManager.data?.data.data
+        .sort((a: any, b: any) => b.orders - a.orders)
+        .forEach((quest: any, index: number) => {
+          data.push({
+            Id: quest.id,
+            Question: quest.question,
+            SelectedItem: null,
+            isDone: true,
+            QuestionType: quest.maintenanceQuestionTypeID,
+            InitialValue: quest.initialValue,
+            EndValue: quest.endValue,
+            trueFalseAnswer: quest.trueFalseAnswer,
+          });
         });
-      });
       setQuestions(data);
     }
   }, [questionsManager.data]);
-
 
   useLayoutEffect(() => {
     questionsManager.fetch(props.maintenanceId);
@@ -132,6 +133,11 @@ const MaintenanceIssueQuestions: FC<Props> = (props) => {
                 }}
               />
             </Box>
+          )}
+          {props.invalidIds && props.invalidIds.includes(quest.Id) && (
+            <Text color="red.500" mt="xs">
+              Lütfen soruyu yanıtlayın
+            </Text>
           )}
         </Box>
       ))}

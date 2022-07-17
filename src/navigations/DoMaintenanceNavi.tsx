@@ -53,6 +53,22 @@ const DoMaintenanceTabs = createBottomTabNavigator();
 const DoMaintenanceNavi = () => {
   return (
     <DoMaintenanceTabs.Navigator>
+       <DoMaintenanceTabs.Screen
+        name="MaintenanceIssueStack"
+        component={MaintenanceIssueStack}
+        options={{
+          tabBarIcon: createIcon("calendar-blank-outline"),
+          tabBarLabel: createLabel("Bakım"),
+        }}
+      />
+      <DoMaintenanceTabs.Screen
+        name="LegalIssueStack"
+        component={LegalIssueStack}
+        options={{
+          tabBarIcon: createIcon("view-comfy"),
+          tabBarLabel: createLabel("Periyodik"),
+        }}
+      />
       <DoMaintenanceTabs.Screen
         name="ControlTaskIssueStack"
         component={ControlTaskIssueStack}
@@ -75,23 +91,6 @@ const DoMaintenanceNavi = () => {
         options={{
           tabBarIcon: createIcon("view-list-outline"),
           tabBarLabel: createLabel("Belge"),
-        }}
-      />
-
-      <DoMaintenanceTabs.Screen
-        name="MaintenanceIssueStack"
-        component={MaintenanceIssueStack}
-        options={{
-          tabBarIcon: createIcon("calendar-blank-outline"),
-          tabBarLabel: createLabel("Bakım"),
-        }}
-      />
-      <DoMaintenanceTabs.Screen
-        name="LegalIssueStack"
-        component={LegalIssueStack}
-        options={{
-          tabBarIcon: createIcon("view-comfy"),
-          tabBarLabel: createLabel("Periyodik"),
         }}
       />
       <DoMaintenanceTabs.Screen

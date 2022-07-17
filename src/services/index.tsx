@@ -29,7 +29,7 @@ import {
   ControlTaskApiFactory,
   CounterApiFactory,
 } from "./swagger/api";
-import { useFetchManager } from "../hooks/fetch-manager";
+import { useFetchManager, useFetchManagerStore } from "../hooks/fetch-manager";
 import axios, { AxiosInstance } from "axios";
 import { store } from "../store";
 import { __mode__, api } from "../constants";
@@ -250,7 +250,7 @@ export const Hooks = {
       typeof API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet
     >(API.InventoryAPI.apiInventoryGetInventoryByBarcodeGet),
   GetCompletedMaintenance: () =>
-    useFetchManager<
+    useFetchManagerStore<
       typeof API.MaintenanceReport.apiMaintenanceReportGetCompletedMaintenanceGet
-    >(API.MaintenanceReport.apiMaintenanceReportGetCompletedMaintenanceGet),
+    >(API.MaintenanceReport.apiMaintenanceReportGetCompletedMaintenanceGet, "completed-maintenance"),
 };
