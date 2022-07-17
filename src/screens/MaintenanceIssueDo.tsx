@@ -54,8 +54,8 @@ const MaintenanceIssueDo: FC<
   }
 
   if (
-    props.route.params.barcode === undefined ||
-    props.route.params.barcode !== detailManager.data?.data.data.barcode
+    (props.route.params.barcode === undefined ||
+    props.route.params.barcode !== detailManager.data?.data.data.barcode) && !__DEV__
   ) {
     return (
       <ScrollView style={{ flex: 1 }}>

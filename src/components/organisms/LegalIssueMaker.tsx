@@ -42,6 +42,16 @@ const LegalIssueMaker: FC<Props> = ({
   const doManager = Hooks.DoLegalMaintenance();
 
   async function handleClickComplete() {
+    if (datas.question === null) {
+      Alert.alert("Lütfen kontrol sorusunu cevaplayınız!");
+      return;
+    }
+
+    if (!datas.firm) {
+      Alert.alert("Lütfen bakım firmasını doldurunuz!");
+      return;
+    }
+
     doManager.fetch({
       answer: !!datas.question,
       completedPersonelName: `${user.name} ${user.surname}`,

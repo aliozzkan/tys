@@ -97,7 +97,9 @@ const MaintenanceIssueDetail: FC<
 
   useLayoutEffect(() => {
     detailManager.fetch(props.route.params.maintenanceIssueId);
-    completedsManager.fetch(project.id);
+    if (!completedsManager.hasData) {
+      completedsManager.fetch(project.id);
+    }
     props.navigation.setOptions({ title: props.route.params.screenTitle });
   }, []);
 
@@ -157,7 +159,13 @@ const MaintenanceIssueDetail: FC<
                   />
                 </Box>
               ) : (
-                <Box p="xl" my="m" backgroundColor="gray.100" borderRadius="s" alignItems="center">
+                <Box
+                  p="xl"
+                  my="m"
+                  backgroundColor="gray.100"
+                  borderRadius="s"
+                  alignItems="center"
+                >
                   <Fontawesome name="photo" size={30} />
                   <Text textAlign="center" mt="m">
                     Ekipman Fotoğrafı Tanımlanmamış
