@@ -423,7 +423,6 @@ const MaintenanceIssueDetail: FC<
                     ))}
                 </Box>
               )}
-
               {maintenance.photos.filter(
                 (photo: any) => photo.type === "formPhoto"
               ).length > 0 && (
@@ -436,7 +435,6 @@ const MaintenanceIssueDetail: FC<
                     borderRadius="l"
                   >
                     <Text variant="bodyHeader">İş İzin / Bakım Formu</Text>
-
                     <Box flexDirection="row" flexWrap="wrap">
                       {maintenance.photos
                         .filter((photo: any) => photo.type === "formPhoto")

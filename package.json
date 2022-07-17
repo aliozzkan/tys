@@ -13,7 +13,8 @@
     "ci": "yarn lint && yarn tsc",
     "build:prod:a": "expo build:android --release-channel prod2",
     "build:prod:i": "expo build:ios --release-channel prod2",
-    "publish:prod": "expo publish --release-channel prod1"
+    "build:prod:i:clear": "expo build:ios --release-channel prod2 --clear-provisioning-profile",
+    "publish:prod": "expo publish --release-channel prod2"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.16.7",
